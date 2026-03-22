@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerInputHandler : MonoBehaviour
+{
+    private InputAction moveAction;
+    [SerializeField] private MapGeneration map;
+    [SerializeField] private MovementHandler moveHandler;
+
+    private void OnEnable()
+    {
+        moveAction = InputSystem.actions.FindAction("PlayerMovement");
+        moveAction.started += OnPlayerInput;
+        if (moveHandler != null)
+            Debug.Log("movementHandler is null");
+    }
+
+
+    private void OnPlayerInput(InputAction.CallbackContext context)
+    {
+        Vector2 playerInput = context.ReadValue<Vector2>();
+
+        if (playerInput.x != 0 && playerInput.y != 0)
+            playerInput.Set(playerInput.x, 0);
+        moveHandler.VerifyDirection(playerInput);
+    }
+}
