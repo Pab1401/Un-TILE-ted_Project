@@ -1,15 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovementHandler : MonoBehaviour
+public class PlayerMovementHandler : MonoBehaviour
 {
-    [SerializeField] private MapGeneration map;
-    private int[] playerPosition = {0 ,0};
-    
-    public void VerifyDirection(Vector2 input)
+    [SerializeField] private GameObject movementTarget;
+    [SerializeField] private MapRender renderer;
+    public void OnMove(Vector2 direction)
     {
-
+        Debug.Log("Direction: " + direction);
+        movementTarget.transform.Translate(direction.x*renderer.spacing, 0, direction.y*renderer.spacing);
     }
-
-
-
 }

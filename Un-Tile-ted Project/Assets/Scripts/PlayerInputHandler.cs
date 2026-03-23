@@ -9,7 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        moveAction = InputSystem.actions.FindAction("PlayerMovement");
+        moveAction = InputSystem.actions.FindAction("Move");
         moveAction.started += OnPlayerInput;
         if (moveHandler != null)
             Debug.Log("movementHandler is null");

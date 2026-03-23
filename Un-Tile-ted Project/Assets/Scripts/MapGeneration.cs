@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Numerics;
 
 public class MapGeneration : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] private int safeZoneSize = 3; // 3x3 area
 
     public int[,] Grid { get; private set; }
+
+    public Vector2Int spawnPos;
 
     // Tile Constants
     public const int EMPTY = 0;
@@ -21,7 +24,8 @@ public class MapGeneration : MonoBehaviour
 
         // 1. Define Player Spawn (Bottom-Right)
         // We offset by 1 to ensure it's not literally on the index edge
-        Vector2Int spawnPos = new Vector2Int(size - 2, size - 2);
+        spawnPos = new Vector2Int(size - 2, size - 2);
+        Debug.Log("Player Spawn Position: " + spawnPos);
 
         // 2. Prepare BFS
         HashSet<Vector2Int> visited = new HashSet<Vector2Int>();

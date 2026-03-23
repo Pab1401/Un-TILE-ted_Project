@@ -17,7 +17,7 @@ public class MapRender : MonoBehaviour
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject forestPrefab;
 
-    public GameObject playerSpawnPosition;
+    public Vector3 playerSpawnPosition;
 
     private GameObject mapParent;
 
@@ -70,7 +70,13 @@ public class MapRender : MonoBehaviour
                         renderer_fl.material = floorMaterial;
                         break;
                 }
+
+                if (dataGenerator.spawnPos.x == x && dataGenerator.spawnPos.y == y)
+                {
+                    playerSpawnPosition = pos + Vector3.up * 1f; // Adjust height to sit on floor
+                }
             }
         }
+        
     }
 }
