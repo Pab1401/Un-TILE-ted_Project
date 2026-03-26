@@ -3,7 +3,7 @@ using UnityEngine;
 public class MovementHandler : MonoBehaviour
 {
     [SerializeField] private MapGeneration map;
-    [SerializeField] private PlayerMovementHandler playerMovementHandler;
+    [SerializeField] private EntityMovementHandler playerMovementHandler;
     private int[] playerPosition = new int[2];
 
     public void SetPlayerPosition()

@@ -17,6 +17,9 @@ public class MapRender : MonoBehaviour
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject forestPrefab;
 
+    [Header("Gameplay Scripts")]
+    [SerializeField] private AIplacementManager aiPlacementManager;
+
     public Vector3 playerSpawnPosition;
 
     private GameObject mapParent;
@@ -38,6 +41,11 @@ public class MapRender : MonoBehaviour
             {
                 // Calculate world position
                 Vector3 pos = new Vector3(x * spacing, 0, y * spacing);
+
+                if (aiPlacementManager.CheckList(x, y) && grid[x, y] == MapGeneration.WALL)
+                {
+                    grid[x, y] = MapGeneration.FLOOR; // Change wall to floor if it's an enemy spawn point
+                }
 
                 // 3. Apply Visuals based on Data
                 switch (grid[x, y])
@@ -70,11 +78,12 @@ public class MapRender : MonoBehaviour
                         renderer_fl.material = floorMaterial;
                         break;
                 }
+                if (aiPlacementManager.CheckList(x, y))
+                    aiPlacementManager.AddSpawnPosition(pos + Vector3.up * 1f); // Adjust height to sit on floor
 
                 if (dataGenerator.spawnPos.x == x && dataGenerator.spawnPos.y == y)
-                {
                     playerSpawnPosition = pos + Vector3.up * 1f; // Adjust height to sit on floor
-                }
+
             }
         }
         

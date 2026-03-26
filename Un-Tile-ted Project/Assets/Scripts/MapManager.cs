@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class MapManager : MonoBehaviour
     public MapGeneration generator;
     public MapRender renderer;
     public PlayerSpawner playerSpawner;
+    [SerializeField] private AIplacementManager aiPlacementManager;
 
     void Start()
     {
@@ -12,5 +14,6 @@ public class MapManager : MonoBehaviour
         generator.GenerateMap();
         renderer.RenderMap();
         playerSpawner.SpawnPlayer();
+        aiPlacementManager.SpawnEnemies();
     }
 }
