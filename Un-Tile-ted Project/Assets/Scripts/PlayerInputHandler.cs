@@ -11,7 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         moveAction.started += OnPlayerInput;
-        if (moveHandler != null)
+        if (moveHandler == null)
             Debug.Log("movementHandler is null");
     }
 

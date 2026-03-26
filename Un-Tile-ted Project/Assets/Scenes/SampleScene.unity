@@ -279,10 +279,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -307,7 +307,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 9.29, z: -9.29}
+  m_LocalPosition: {x: 0, y: 34.21, z: -34.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -580,37 +580,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1378622264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &974329156
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 974329157}
-  m_Layer: 0
-  m_Name: EnemyMovementHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &974329157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974329156}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.03666, y: 0, z: 4.6332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186218689
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,14 +722,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a19ad627cac9747a626bdffc842a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIplacementManager
-  aiMovementHandler: {fileID: 0}
   dataGenerator: {fileID: 899213556}
   mapRender: {fileID: 185668388}
   enemyPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
   enemySpawnPoints:
-  - {x: 3, y: 3}
-  - {x: 8, y: 8}
-  - {x: 13, y: 13}
   - {x: 25, y: 25}
 --- !u!1 &1653388636
 GameObject:
@@ -949,4 +914,3 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1378622264}
   - {fileID: 1653388640}
-  - {fileID: 974329157}

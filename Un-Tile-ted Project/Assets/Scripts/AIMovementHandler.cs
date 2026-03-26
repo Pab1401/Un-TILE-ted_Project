@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AIMovementHandler : MonoBehaviour
@@ -7,15 +8,22 @@ public class AIMovementHandler : MonoBehaviour
     {
         int x = (int)direction.x;
         int y = (int)direction.y;
-
-        if (map.Grid[enemyPosition[0] + x, enemyPosition[1] + y] != 2 && map.Grid[enemyPosition[0] + x, enemyPosition[1] + y] != null)
+        try
         {
-            enemyPosition[0] += x;
-            enemyPosition[1] += y;
-            Debug.Log("Enemy position: " + enemyPosition[0] + ", " + enemyPosition[1]);
-            // Call the movement handler for the enemy
-            return true;
+            if (map.Grid[enemyPosition[0] + x, enemyPosition[1] + y] != 2 && (enemyPosition[0] + x <= map.Grid.GetLength(1) - 1 || enemyPosition[1] + y <= map.Grid.GetLength(0) - 1))
+            {
+                enemyPosition[0] += x;
+                enemyPosition[1] += y;
+                //Debug.Log("Enemy position: " + enemyPosition[0] + ", " + enemyPosition[1]);
+                // Call the movement handler for the enemy
+                return true;
+            }
+            return false;
         }
-        return false;
+        catch(IndexOutOfRangeException ex)
+        {
+            return false;
+        }
+        
     }
 }

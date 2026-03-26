@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AIplacementManager : MonoBehaviour
 {
-    [SerializeField] private AIMovementHandler aiMovementHandler;
     [SerializeField] private MapGeneration dataGenerator;
     [SerializeField] private MapRender mapRender;
     [SerializeField] private GameObject enemyPrefab;

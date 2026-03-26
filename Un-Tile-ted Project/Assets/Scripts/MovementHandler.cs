@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovementHandler : MonoBehaviour
@@ -14,13 +15,19 @@ public class MovementHandler : MonoBehaviour
     {
         int x = (int)input.x;
         int y = (int)input.y;
-
-        if (map.Grid[playerPosition[0] + x, playerPosition[1] + y] != 2 && map.Grid[playerPosition[0] + x, playerPosition[1] + y] != null)
+        try
         {
-            playerPosition[0] += x;
-            playerPosition[1] += y;
-            Debug.Log("Player position: " + playerPosition[0] + ", " + playerPosition[1]);
-            playerMovementHandler.OnMove(input);
+            if (map.Grid[playerPosition[0] + x, playerPosition[1] + y] != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0))
+            {
+                playerPosition[0] += x;
+                playerPosition[1] += y;
+                //Debug.Log("Player position: " + playerPosition[0] + ", " + playerPosition[1]);
+                playerMovementHandler.OnMove(input);
+            }
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            //Debug.Log(ex.Message);
         }
     }
 

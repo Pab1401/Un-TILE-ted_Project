@@ -72,11 +72,11 @@ public class MapGeneration : MonoBehaviour
     private int DetermineTileType(int parentType, int x, int y)
     {
         float roll = Random.value;
-        float wallChance = 0.2f;
+        float wallChance = 0.15f;
         float forestChance = 0.15f;
 
         // Clustering Logic
-        if (parentType == WALL) wallChance -= 0.15f;
+        if (parentType == WALL) wallChance -= 0.05f;
         if (parentType == FOREST) forestChance += 0.45f;
 
         // Diagonal Pinch Prevention
