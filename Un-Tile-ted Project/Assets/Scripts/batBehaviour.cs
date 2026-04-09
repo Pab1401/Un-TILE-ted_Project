@@ -11,6 +11,10 @@ public class batBehaviour : MonoBehaviour
     void OnEnable()
     {
         Debug.Log("Im a bat mf");
+        
+    }
+    void Start()
+    {
         InvokeRepeating("MoveEnemy", startTime, repeatTime);
     }
 

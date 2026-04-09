@@ -79,10 +79,10 @@ public class MapRender : MonoBehaviour
                         break;
                 }
                 if (aiPlacementManager.CheckList(x, y))
-                    aiPlacementManager.AddSpawnPosition(pos + Vector3.up * 1f); // Adjust height to sit on floor
+                    aiPlacementManager.AddSpawnPosition(pos + Vector3.up * 1.05f); // Adjust height to sit on floor
 
                 if (dataGenerator.spawnPos.x == x && dataGenerator.spawnPos.y == y)
-                    playerSpawnPosition = pos + Vector3.up * 1f; // Adjust height to sit on floor
+                    playerSpawnPosition = pos + Vector3.up * 1.2f; // Adjust height to sit on floor
 
             }
         }
