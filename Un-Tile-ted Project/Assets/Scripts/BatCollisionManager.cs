@@ -9,9 +9,15 @@ public class BatCollisionManager : MonoBehaviour
         Debug.Log("Collision Detected");
         ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
         if (damageable != null)
-        {
-            damageable.TakeDamage(batStats.damage);
-        }
+            if (other.gameObject.CompareTag("Player"))
+            {
+                damageable.TakeDamage(batStats.damage);
+                Vector2 playerInput = other.gameObject.GetComponent<PlayerInputHandler>().playerInput;
+                MovementHandler playerMove = other.gameObject.GetComponentInChildren<MovementHandler>();
+                if (playerMove == null)
+                    Debug.Log("PlayerMove is null");
+                playerMove.VerifyDirection(-playerInput);
+            }
     }
     void Start()
     {

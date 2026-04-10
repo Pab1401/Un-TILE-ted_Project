@@ -6,6 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction moveAction;
     [SerializeField] private MapGeneration map;
     [SerializeField] private MovementHandler moveHandler;
+    public Vector2 playerInput;
 
     private void OnEnable()
     {
@@ -18,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnPlayerInput(InputAction.CallbackContext context)
     {
-        Vector2 playerInput = context.ReadValue<Vector2>();
+        playerInput = context.ReadValue<Vector2>();
 
         if (playerInput.x != 0 && playerInput.y != 0)
             playerInput.Set(playerInput.x, 0);
