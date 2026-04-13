@@ -24,14 +24,17 @@ public class cursorHandler : MonoBehaviour
 
     private void OnCursorMove(InputAction.CallbackContext context)
     {
+        // Vector2 cursorInput = context.ReadValue<Vector2>();
+        // cursorInput = cursorInput.normalized * cursorDistance;
+        // cursorObject.localPosition = Vector3.Lerp(cursorObject.localPosition, new Vector3(cursorInput.x, cursorInput.y, 0), smoothSpeed);
         Vector2 cursorInput = context.ReadValue<Vector2>();
-        cursorInput = cursorInput.normalized * cursorDistance;
-        cursorObject.localPosition = Vector3.Lerp(cursorObject.localPosition, new Vector3(cursorInput.x, cursorInput.y, 0), smoothSpeed);
+        Vector2 adjustedInput = cursorInput * Time.deltaTime;
+        cursorObject.localPosition = (cursorObject.localPosition + new Vector3(adjustedInput.x, adjustedInput.y, 0)).normalized * cursorDistance;
     }
 
     private void OnCursorClick(InputAction.CallbackContext context)
     {
-        Vector3 targetPosition = new Vector3(cursorObject.transform.localPosition.x, 0, cursorObject.transform.localPosition.y);
+        Vector3 targetPosition = new Vector3(cursorObject.transform.localPosition.x, 0, cursorObject.transform.localPosition.y).normalized;
         shootLogic.Shoot(player.transform.position, player.transform.position + targetPosition, 10f, bulletPrefab, player);
     }
 
