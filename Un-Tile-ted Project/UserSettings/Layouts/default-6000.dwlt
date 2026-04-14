@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 36
+  controlID: 37
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -141,8 +141,8 @@ MonoBehaviour:
     y: 0
     width: 226
     height: 933
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 37
+  controlID: 38
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -247,8 +247,8 @@ MonoBehaviour:
     y: 0
     width: 583
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -569,7 +569,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/SpiteSheets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 56
   m_LastFolders:
-  - Assets
+  - Assets/SpiteSheets
   m_LastFoldersGridSize: 56
   m_LastProjectPath: C:\Users\rodlo\OneDrive\Escritorio\Un-TILE-ted_Project\Un-Tile-ted
     Project
@@ -589,12 +589,12 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 47370
+    - m_Data: 47796
     m_LastClickedID:
-      m_Data: 47370
+      m_Data: 47796
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 47370
+    - m_Data: 47764
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -679,7 +679,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 9}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -736,10 +736,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -2864
       - m_Data: -1296
-      - m_Data: 45726
-      - m_Data: 45758
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1424,7 +1421,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.021023802, y: -0.17546165, z: 0.0035055296, w: 0.984378}
     speed: 2
-    m_Value: {x: 0.02102127, y: -0.1754405, z: 0.0035051072, w: 0.98425937}
+    m_Value: {x: -0.021023802, y: 0.17546165, z: -0.0035055296, w: -0.984378}
   m_Size:
     m_Target: 0.016015356
     speed: 2
