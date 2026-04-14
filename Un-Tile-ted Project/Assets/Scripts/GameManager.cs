@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInput;
     [SerializeField] private cursorHandler cursor;
+    [SerializeField] Canvas canvas;
     private int enemyCount;
     public int EnemyCount
     {
@@ -21,12 +22,13 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
+        canvas.enabled = false;
         isPaused = false;
         pauseAction = InputSystem.actions.FindAction("Pause");
         pauseAction.performed += OnPause;
     }
 
-    private void OnPause(InputAction.CallbackContext context)
+    public void Pause()
     {
         isPaused = !isPaused;
         UnityEngine.Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -37,13 +39,20 @@ public class GameManager : MonoBehaviour
             playerInput.moveAction.Disable();
             cursor.cursorAction.Disable();
             cursor.cursorClickAction.Disable();
+            canvas.enabled = true;
         }
         else
         {
             playerInput.moveAction.Enable();
             cursor.cursorAction.Enable();
             cursor.cursorClickAction.Enable();
+            canvas.enabled = false;
         }
+    }
+
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        Pause();
     }
     public void GameEnd()
     {

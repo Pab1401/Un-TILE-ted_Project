@@ -12,6 +12,11 @@ public class BulletStats : MonoBehaviour
             return;
         if (other.gameObject.CompareTag("bullet"))
             return;
+        if (other.gameObject.GetComponent<ICanCollide>() != null)
+        {
+            //Possible bounce logic
+            Destroy(gameObject);
+        }
         if (other.gameObject.GetComponent<ITakeDamage>() != null)
         {
             ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
