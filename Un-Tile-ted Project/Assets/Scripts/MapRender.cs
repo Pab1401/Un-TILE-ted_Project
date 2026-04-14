@@ -64,7 +64,7 @@ public class MapRender : MonoBehaviour
                         MeshRenderer renderer_w = wall.GetComponent<MeshRenderer>();
                         renderer_w.material = WallMaterial;
                         // Visual flair: make walls taller
-                        wall.transform.localScale = new Vector3(1, 2, 1);
+                        //wall.transform.localScale = new Vector3(1, 2, 1);
                         wall.transform.position += Vector3.up * 0.5f; // Adjust height so it sits on floor
                         break;
 

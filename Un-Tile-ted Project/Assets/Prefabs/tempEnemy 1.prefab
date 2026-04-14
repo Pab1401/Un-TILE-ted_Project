@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::batBehaviour
   movementHandler: {fileID: 3136484013731438090}
   entityMovementHandler: {fileID: 8186523701389757977}
-  startTime: 0
+  startTime: 0.5
   repeatTime: 2
   pos: 0000000000000000
 --- !u!114 &8186523701389757977
