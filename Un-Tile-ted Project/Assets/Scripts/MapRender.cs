@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapRender : MonoBehaviour
@@ -6,16 +7,22 @@ public class MapRender : MonoBehaviour
     [SerializeField] private MapGeneration dataGenerator;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject cubePrefab;
+    //[SerializeField] private GameObject cubePrefab;
+    [SerializeField] private GameObject FloorPrefab;
+    [SerializeField] private GameObject WallPrefab;
+    [SerializeField] private GameObject ForestPrefab;
 
     [Header("Visual Settings")]
     [SerializeField] public float spacing = 1.1f;
-    [SerializeField] private Material floorMaterial;
-    [SerializeField] private Material wallMaterial;
-    [SerializeField] private Material forestMaterial;
-    [SerializeField] private GameObject floorPrefab;
-    [SerializeField] private GameObject wallPrefab;
-    [SerializeField] private GameObject forestPrefab;
+
+    [Header("Materials")]
+    [SerializeField] private Material FloorMaterial;
+    [SerializeField] private Material WallMaterial;
+    [SerializeField] private Material ForestMaterial;
+
+    private Vector3 SideCenter;
+    private Vector3 TopCenter;
+    
 
     [Header("Gameplay Scripts")]
     [SerializeField] private AIplacementManager aiPlacementManager;
@@ -51,31 +58,31 @@ public class MapRender : MonoBehaviour
                 switch (grid[x, y])
                 {
                     case MapGeneration.WALL:
-                        GameObject wall = Instantiate(wallPrefab, pos, Quaternion.identity, mapParent.transform);
+                        GameObject wall = Instantiate(WallPrefab, pos, Quaternion.identity, mapParent.transform);
                         wall.name = $"Cell_{x}_{y}";
 
                         MeshRenderer renderer_w = wall.GetComponent<MeshRenderer>();
-                        renderer_w.material = wallMaterial;
+                        renderer_w.material = WallMaterial;
                         // Visual flair: make walls taller
                         wall.transform.localScale = new Vector3(1, 2, 1);
                         wall.transform.position += Vector3.up * 0.5f; // Adjust height so it sits on floor
                         break;
 
                     case MapGeneration.FOREST:
-                        GameObject forest = Instantiate(forestPrefab, pos, Quaternion.identity, mapParent.transform);
+                        GameObject forest = Instantiate(ForestPrefab, pos, Quaternion.identity, mapParent.transform);
                         forest.name = $"Cell_{x}_{y}";
 
                         MeshRenderer renderer_fo = forest.GetComponent<MeshRenderer>();
-                        renderer_fo.material = forestMaterial;
+                        renderer_fo.material = ForestMaterial;
                         break;
 
                     case MapGeneration.FLOOR:
                     default:
-                        GameObject floor = Instantiate(floorPrefab, pos, Quaternion.identity, mapParent.transform);
+                        GameObject floor = Instantiate(FloorPrefab, pos, Quaternion.identity, mapParent.transform);
                         floor.name = $"Cell_{x}_{y}";
 
                         MeshRenderer renderer_fl = floor.GetComponent<MeshRenderer>();
-                        renderer_fl.material = floorMaterial;
+                        renderer_fl.material = FloorMaterial;
                         break;
                 }
                 if (aiPlacementManager.CheckList(x, y))

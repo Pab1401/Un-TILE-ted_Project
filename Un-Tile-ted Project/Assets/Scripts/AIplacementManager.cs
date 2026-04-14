@@ -12,6 +12,8 @@ public class AIplacementManager : MonoBehaviour
     [SerializeField] private GameObject scorpionPrefab;
     [SerializeField] private ShootLogic shootLogic;
     [SerializeField] private GameObject scorpionProjectilePrefab;
+    [SerializeField] private GameManager GameManager;
+    [Range(0, 1)]
     public int enemyDecision = 1;
     private List<Vector3> enemySpawnPositions = new List<Vector3>();
     
@@ -38,6 +40,7 @@ public class AIplacementManager : MonoBehaviour
                 BatEnemyStats enemyStats = enemy.AddComponent<BatEnemyStats>();
                 BatCollisionManager colManager = enemy.AddComponent<BatCollisionManager>();
                 colManager.batStats = enemyStats;
+                enemyStats.manager = GameManager;
             }
         }
         else if (enemyDecision == 1)
@@ -51,6 +54,9 @@ public class AIplacementManager : MonoBehaviour
                 ScorpionScript.projectilePrefab = scorpionProjectilePrefab;
                 ScorpionScript.shootLogic = shootLogic;
                 ScorpionScript.player = player;
+                enemyStats.manager = GameManager;
+                Rigidbody rb = enemy.AddComponent<Rigidbody>();
+                rb.useGravity = false;
                 //ScorpionCollisionManager colManager = enemy.AddComponent<ScorpionCollisionManager>();
                 //colManager.scorpionStats = enemyStats;
                 //colManager.shootLogic = shootLogic;
@@ -58,7 +64,7 @@ public class AIplacementManager : MonoBehaviour
                 //colManager.projectilePrefab = scorpionProjectilePrefab;
             }
         }
-        
+        GameManager.EnemyCount = enemySpawnPoints.Count;
     }
 
     public bool CheckList(int x, int y)

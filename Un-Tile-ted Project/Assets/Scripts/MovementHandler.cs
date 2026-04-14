@@ -25,7 +25,7 @@ public class MovementHandler : MonoBehaviour
                 playerMovementHandler.OnMove(input);
             }
         }
-        catch (IndexOutOfRangeException ex)
+        catch (IndexOutOfRangeException)
         {
             //Debug.Log(ex.Message);
         }

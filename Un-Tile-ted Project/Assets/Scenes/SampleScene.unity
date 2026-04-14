@@ -195,14 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapRender
   dataGenerator: {fileID: 899213556}
-  cubePrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
+  FloorPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
+  WallPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
+  ForestPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
   spacing: 1.3
-  floorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
-  wallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
-  forestMaterial: {fileID: 2100000, guid: 29e638beee607b745b7c24eb996443dd, type: 2}
-  floorPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
-  wallPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
-  forestPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
+  FloorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
+  WallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
+  ForestMaterial: {fileID: 2100000, guid: 29e638beee607b745b7c24eb996443dd, type: 2}
   aiPlacementManager: {fileID: 1586103679}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &185668389
@@ -693,6 +692,24 @@ MonoBehaviour:
   shootLogic: {fileID: 1662120007}
   player: {fileID: 1653388636}
   bulletPrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
+  cursorAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0d0254ca-7837-4431-904c-b5fc6e028c92
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  cursorClickAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 36428d09-28b1-4914-9807-f47c09e14353
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!4 &1110520815
 Transform:
   m_ObjectHideFlags: 0
@@ -703,6 +720,52 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.91344, y: 0.7314, z: 26.94019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158321309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158321311}
+  - component: {fileID: 1158321310}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158321310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158321309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d88fe5b50ec3e48b533caec09efd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playerInput: {fileID: 1653388641}
+  cursor: {fileID: 1110520814}
+--- !u!4 &1158321311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158321309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.95394, y: -0, z: 28.82443}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -784,7 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapManager
   generator: {fileID: 899213556}
-  renderer: {fileID: 185668388}
+  render: {fileID: 185668388}
   playerSpawner: {fileID: 1944316535}
   aiPlacementManager: {fileID: 1586103679}
 --- !u!4 &1378622264
@@ -983,7 +1046,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422831346}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1086,7 +1149,8 @@ MonoBehaviour:
   scorpionPrefab: {fileID: 1244017973247475735, guid: dbb622d51533da54dbefabe9b2db105b, type: 3}
   shootLogic: {fileID: 1662120007}
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
-  enemyDecision: 0
+  GameManager: {fileID: 1158321310}
+  enemyDecision: 1
 --- !u!1 &1653388636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1284,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54806bced9fe51f478e1f362e10941e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d8e77df8-220c-4852-a51c-9383e4303288
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   map: {fileID: 899213556}
   moveHandler: {fileID: 1186218690}
   playerInput: {x: 0, y: 0}
@@ -1235,6 +1308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4589346fc07ff5b48998677db2e22fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  manager: {fileID: 1158321310}
+  PlayerDamage: 15
+  bulletBounce: 2
+  maxBullets: 5
 --- !u!54 &1653388643
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1336,7 +1413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7469877544f7ee943bee3c8452849db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
-  renderer: {fileID: 185668388}
+  render: {fileID: 185668388}
   player: {fileID: 1653388636}
   movementHandler: {fileID: 1186218690}
 --- !u!4 &1944316536
@@ -1467,3 +1544,4 @@ SceneRoots:
   - {fileID: 2026902305}
   - {fileID: 1045788882}
   - {fileID: 1110520815}
+  - {fileID: 1158321311}

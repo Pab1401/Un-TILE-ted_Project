@@ -4,7 +4,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public MapGeneration generator;
-    public MapRender renderer;
+    public MapRender render;
     public PlayerSpawner playerSpawner;
     [SerializeField] private AIplacementManager aiPlacementManager;
 
@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
     {
         // The Sequence: Logic first, then Visuals
         generator.GenerateMap();
-        renderer.RenderMap();
+        render.RenderMap();
         playerSpawner.SpawnPlayer();
         aiPlacementManager.SpawnEnemies();
     }

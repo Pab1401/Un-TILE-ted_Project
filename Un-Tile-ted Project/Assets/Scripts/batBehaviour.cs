@@ -6,7 +6,7 @@ public class batBehaviour : MonoBehaviour
     [SerializeField] public AIMovementHandler movementHandler;
     public EntityMovementHandler entityMovementHandler;
     public float startTime = 0f;
-    public float repeatTime = 2f;
+    public float repeatTime = 3f;
     public int[] pos = new int[2];
     void OnEnable()
     {

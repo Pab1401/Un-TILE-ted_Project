@@ -9,17 +9,31 @@ public class cursorHandler : MonoBehaviour
     [SerializeField] private ShootLogic shootLogic;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject bulletPrefab;
-    private InputAction cursorAction;
-    private InputAction cursorClickAction;
-    private float smoothSpeed = 2f;
+    public InputAction cursorAction;
+    public InputAction cursorClickAction;
+
+    // Player stats that will be carried from the Stats script
+    private int bulletBounce;
+    private float damage;
+
+
     void OnEnable()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         cursorAction = InputSystem.actions.FindAction("CursorMove");
+        cursorAction.Enable();
         cursorAction.performed += OnCursorMove;
         cursorClickAction = InputSystem.actions.FindAction("CursorClick");
+        cursorClickAction.Enable();
         cursorClickAction.started += OnCursorClick;
+        CheckStats();
+    }
+
+    private void CheckStats()
+    {
+        bulletBounce = player.GetComponent<PlayerStatus>().bulletBounce;
+        damage = player.GetComponent<PlayerStatus>().PlayerDamage;
     }
 
     private void OnCursorMove(InputAction.CallbackContext context)
@@ -35,7 +49,15 @@ public class cursorHandler : MonoBehaviour
     private void OnCursorClick(InputAction.CallbackContext context)
     {
         Vector3 targetPosition = new Vector3(cursorObject.transform.localPosition.x, 0, cursorObject.transform.localPosition.y).normalized;
-        shootLogic.Shoot(player.transform.position, player.transform.position + targetPosition, 10f, bulletPrefab, player);
+        if (player.GetComponent<PlayerStatus>().CurrentBullets > 0)
+        {
+            player.GetComponent<PlayerStatus>().CurrentBullets--;
+            shootLogic.Shoot(player.transform.position, player.transform.position + targetPosition, damage, bulletPrefab, player, bulletBounce);
+        }
+        else
+        {
+            Debug.Log("Out of bullets!");
+        }
     }
 
 

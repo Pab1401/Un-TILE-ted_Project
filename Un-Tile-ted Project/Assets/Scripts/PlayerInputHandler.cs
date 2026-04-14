@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private InputAction moveAction;
+    public InputAction moveAction;
     [SerializeField] private MapGeneration map;
     [SerializeField] private MovementHandler moveHandler;
     public Vector2 playerInput;
@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnEnable()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        moveAction.Enable();
         moveAction.started += OnPlayerInput;
         if (moveHandler == null)
             Debug.Log("movementHandler is null");

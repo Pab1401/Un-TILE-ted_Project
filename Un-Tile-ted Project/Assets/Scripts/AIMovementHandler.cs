@@ -20,7 +20,7 @@ public class AIMovementHandler : MonoBehaviour
             }
             return false;
         }
-        catch(IndexOutOfRangeException ex)
+        catch(IndexOutOfRangeException)
         {
             return false;
         }

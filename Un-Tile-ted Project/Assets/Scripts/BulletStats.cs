@@ -4,16 +4,23 @@ public class BulletStats : MonoBehaviour
 {
     public float damage;
     public GameObject shooter;
+    public int bounce;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == shooter)
             return;
-        ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
-        if (damageable != null)
+        if (other.gameObject.CompareTag("bullet"))
+            return;
+        if (other.gameObject.GetComponent<ITakeDamage>() != null)
         {
-            damageable.TakeDamage(damage);
+            ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
+            Destroy(gameObject);    
         }
-        Destroy(gameObject);
+        
     }
 }
