@@ -195,10 +195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapRender
   dataGenerator: {fileID: 899213556}
-  FloorPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
-  WallPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
-  ForestPrefab: {fileID: 1645659442852354998, guid: 08be2ce8a11ccff488cd6300c31ebee1, type: 3}
-  spacing: 1.3
+  FloorPrefab: {fileID: 20328618718980222, guid: 225e60d900404d64dbbee62eeef0386e, type: 3}
+  WallPrefab: {fileID: 4665568860243863614, guid: 16750797facf5f3408884e2424f149c6, type: 3}
+  ForestPrefab: {fileID: 6677404834392293815, guid: a5a4d6182406f1f40a04f24832916d6d, type: 3}
+  spacing: 1.1
   FloorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
   WallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
   ForestMaterial: {fileID: 2100000, guid: 29e638beee607b745b7c24eb996443dd, type: 2}
