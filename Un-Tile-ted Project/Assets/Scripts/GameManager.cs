@@ -1,11 +1,17 @@
+using Unity.VectorGraphics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler playerInput;
     [SerializeField] private cursorHandler cursor;
-    [SerializeField] Canvas canvas;
+    [SerializeField] UnityEngine.UI.Image pauseMenu;
+    [SerializeField] UnityEngine.UI.Image levelClearedMenu;
+    [SerializeField] UnityEngine.UI.Image levelFailedMenu;
+    [SerializeField] SceneAsset nextScene;
     private int enemyCount;
     public int EnemyCount
     {
@@ -22,7 +28,9 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        canvas.enabled = false;
+        levelFailedMenu.gameObject.SetActive(false);
+        levelClearedMenu.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(false);
         isPaused = false;
         pauseAction = InputSystem.actions.FindAction("Pause");
         pauseAction.performed += OnPause;
@@ -39,14 +47,14 @@ public class GameManager : MonoBehaviour
             playerInput.moveAction.Disable();
             cursor.cursorAction.Disable();
             cursor.cursorClickAction.Disable();
-            canvas.enabled = true;
+            pauseMenu.gameObject.SetActive(true);
         }
         else
         {
             playerInput.moveAction.Enable();
             cursor.cursorAction.Enable();
             cursor.cursorClickAction.Enable();
-            canvas.enabled = false;
+            pauseMenu.gameObject.SetActive(false);
         }
     }
 
@@ -56,11 +64,30 @@ public class GameManager : MonoBehaviour
     }
     public void GameEnd()
     {
-        Debug.Log("Game Over");
+        Cursor.lockState = CursorLockMode.None;
+        playerInput.moveAction.Disable();
+        cursor.cursorAction.Disable();
+        cursor.cursorClickAction.Disable();
+        levelFailedMenu.gameObject.SetActive(true);
     }
 
     public void GameWin()
     {
-        Debug.Log("You win");
+        Cursor.lockState= CursorLockMode.None;
+        playerInput.moveAction.Disable();
+        cursor.cursorAction.Disable();
+        cursor.cursorClickAction.Disable();
+        levelClearedMenu.gameObject.SetActive(true);
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(nextScene.name);
+    }
+
+    public void LevelRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
