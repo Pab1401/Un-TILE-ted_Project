@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image pauseMenu;
     [SerializeField] UnityEngine.UI.Image levelClearedMenu;
     [SerializeField] UnityEngine.UI.Image levelFailedMenu;
-    [SerializeField] SceneAsset nextScene;
+    //[SerializeField] SceneAsset nextScene;
+    public string nextScene;
     private int enemyCount;
     public int EnemyCount
     {
@@ -82,12 +83,12 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(nextScene.name);
+        SceneManager.LoadScene(nextScene);
     }
 
     public void LevelRestart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
