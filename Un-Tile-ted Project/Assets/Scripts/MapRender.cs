@@ -40,6 +40,7 @@ public class MapRender : MonoBehaviour
 
         int[,] grid = dataGenerator.Grid;
         int size = grid.GetLength(0);
+        aiPlacementManager.GenerateEnemySpawnPositions();
 
         // 2. Loop through the data and spawn visuals
         for (int x = 0; x < size; x++)
@@ -63,9 +64,7 @@ public class MapRender : MonoBehaviour
 
                         MeshRenderer renderer_w = wall.GetComponent<MeshRenderer>();
                         renderer_w.material = WallMaterial;
-                        // Visual flair: make walls taller
-                        //wall.transform.localScale = new Vector3(1, 2, 1);
-                        wall.transform.position += Vector3.up * 0.5f; // Adjust height so it sits on floor
+                        wall.transform.position += Vector3.up * 0.5f;
                         break;
 
                     case MapGeneration.FOREST:
@@ -86,7 +85,7 @@ public class MapRender : MonoBehaviour
                         break;
                 }
                 if (aiPlacementManager.CheckList(x, y))
-                    aiPlacementManager.AddSpawnPosition(pos + Vector3.up * 1.05f); // Adjust height to sit on floor
+                    aiPlacementManager.AddSpawnPosition(new Vector2(x, y), pos + Vector3.up * 1.05f); // Adjust height to sit on floor
 
                 if (dataGenerator.spawnPos.x == x && dataGenerator.spawnPos.y == y)
                     playerSpawnPosition = pos + Vector3.up * 1.2f; // Adjust height to sit on floor

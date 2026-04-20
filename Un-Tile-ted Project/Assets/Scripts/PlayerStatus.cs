@@ -13,6 +13,8 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
     public int bulletBounce = 2;
     public int maxBullets = 5;
     private int currentBullets = 0;
+
+    public float reloadTime = 4;
     public int CurrentBullets
     {
         get { return currentBullets; }
@@ -54,7 +56,7 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
     }
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(reloadTime);
         currentBullets = maxBullets;
     }
 

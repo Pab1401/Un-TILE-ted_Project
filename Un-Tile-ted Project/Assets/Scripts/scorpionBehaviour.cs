@@ -4,12 +4,11 @@ public class scorpionBehaviour : MonoBehaviour
 {
     public ShootLogic shootLogic;
     public GameObject projectilePrefab;
+    public ScorpionStats stats;
     public GameObject player;
     
     public float startTime = 2f;
     public float repeatTime = 8f;
-
-    private float damage = 15f;
 
     void OnEnable()
     {
@@ -24,7 +23,7 @@ public class scorpionBehaviour : MonoBehaviour
     void Shoot()
     {
         
-        shootLogic.Shoot(transform.position, player.transform.position, damage, projectilePrefab, gameObject);
+        shootLogic.Shoot(transform.position, player.transform.position, stats.BulletDamage, projectilePrefab, gameObject);
     }
 
 }
