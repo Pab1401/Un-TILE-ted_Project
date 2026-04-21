@@ -64,7 +64,7 @@ public class MapRender : MonoBehaviour
 
                         MeshRenderer renderer_w = wall.GetComponent<MeshRenderer>();
                         renderer_w.material = WallMaterial;
-                        wall.transform.position += Vector3.up * 0.5f;
+                        // wall.transform.position += Vector3.up * 0.5f;
                         break;
 
                     case MapGeneration.FOREST:

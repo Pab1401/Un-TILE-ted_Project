@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameEnd()
     {
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         playerInput.moveAction.Disable();
         cursor.cursorAction.Disable();
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void GameWin()
     {
+        Cursor.visible = true;
         Cursor.lockState= CursorLockMode.None;
         playerInput.moveAction.Disable();
         cursor.cursorAction.Disable();
