@@ -7,7 +7,7 @@ public class ScorpionCollisionManager : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
-        if (other.GetComponent<ITakeDamage>() == null)
+        if (other.GetComponent<ITakeDamage>() == null && other.gameObject.tag == "Player")
             return;
         damageable.TakeDamage(stats.CollisionDamage);
         Vector2 playerInput = other.gameObject.GetComponent<PlayerInputHandler>().playerInput;

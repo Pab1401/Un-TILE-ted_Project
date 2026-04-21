@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 9047971373023114024}
   - component: {fileID: 9103739687329821619}
   m_Layer: 0
-  m_Name: scorpionTemp
-  m_TagString: Untagged
+  m_Name: Scorpion
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6566702166888314462}
   - component: {fileID: 5310293493506652158}
+  - component: {fileID: 2197077069260953693}
   m_Layer: 0
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -204,3 +205,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2197077069260953693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5719770993022934385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddc573e4304a0d4a9915fa6f77582fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRotator

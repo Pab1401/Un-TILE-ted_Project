@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2502978373193700342}
   - component: {fileID: 7659636781783569913}
+  - component: {fileID: 5046462515819752055}
   m_Layer: 0
   m_Name: spriteRenderer
   m_TagString: Untagged
@@ -91,6 +92,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5046462515819752055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213914561013330491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddc573e4304a0d4a9915fa6f77582fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRotator
 --- !u!1 &3224017341082361379
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,8 +119,8 @@ GameObject:
   - component: {fileID: 4264805713474424438}
   - component: {fileID: 5705429772790968340}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: Bat
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

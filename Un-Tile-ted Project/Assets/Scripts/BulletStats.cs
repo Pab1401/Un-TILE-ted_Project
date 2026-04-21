@@ -8,7 +8,7 @@ public class BulletStats : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == shooter)
+        if (other.gameObject.tag == shooter.tag)
             return;
         if (other.gameObject.CompareTag("bullet"))
             return;

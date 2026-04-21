@@ -96,6 +96,7 @@ public class AIplacementManager : MonoBehaviour
                 BatEnemyStats enemyStats = enemy.AddComponent<BatEnemyStats>();
                 BatCollisionManager colManager = enemy.AddComponent<BatCollisionManager>();
                 colManager.batStats = enemyStats;
+                enemyStats.behaviour = batScript;
                 enemyStats.manager = GameManager;
             }
         }

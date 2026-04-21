@@ -15,6 +15,11 @@ public class batBehaviour : MonoBehaviour
     }
     void Start()
     {
+        MoveFunction();
+    }
+
+    public void MoveFunction()
+    {
         InvokeRepeating("MoveEnemy", startTime, repeatTime);
     }
 

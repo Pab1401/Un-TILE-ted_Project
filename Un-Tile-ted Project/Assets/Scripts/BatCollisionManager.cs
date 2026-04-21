@@ -6,7 +6,7 @@ public class BatCollisionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Detected");
+        // Debug.Log("Collision Detected");
         ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
         if (damageable != null)
             if (other.gameObject.CompareTag("Player"))
@@ -17,6 +17,7 @@ public class BatCollisionManager : MonoBehaviour
                 if (playerMove == null)
                     Debug.Log("PlayerMove is null");
                 playerMove.VerifyDirection(-playerInput);
+                batStats.StartCoroutine(batStats.TookDamage());
             }
     }
     void Start()
