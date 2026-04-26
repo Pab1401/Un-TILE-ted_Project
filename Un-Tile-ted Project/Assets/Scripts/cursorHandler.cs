@@ -30,6 +30,18 @@ public class cursorHandler : MonoBehaviour
         CheckStats();
     }
 
+    private void OnDisable()
+    {
+        cursorAction.Disable();
+        cursorClickAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        cursorAction.performed -= OnCursorMove;
+        cursorClickAction.started -= OnCursorClick;
+    }
+
     private void CheckStats()
     {
         bulletBounce = player.GetComponent<PlayerStatus>().bulletBounce;

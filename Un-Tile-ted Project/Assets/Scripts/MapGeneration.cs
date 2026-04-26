@@ -8,7 +8,12 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] private int size = 33;
     [SerializeField] private int safeZoneSize = 3; // 3x3 area
 
-    public int[,] Grid { get; private set; }
+    public struct Cells
+    {
+        public int block;
+        public bool taken;
+    }
+    public Cells[,] Grid;
 
     public Vector2Int spawnPos;
 
@@ -20,7 +25,7 @@ public class MapGeneration : MonoBehaviour
 
     public void GenerateMap()
     {
-        Grid = new int[size, size];
+        Grid = new Cells[size, size];
 
         // 1. Define Player Spawn (Bottom-Right)
         // We offset by 1 to ensure it's not literally on the index edge
@@ -38,7 +43,7 @@ public class MapGeneration : MonoBehaviour
             {
                 if (InBounds(x, y))
                 {
-                    Grid[x, y] = FLOOR;
+                    Grid[x, y].block = FLOOR;
                     Vector2Int pos = new Vector2Int(x, y);
                     visited.Add(pos);
                     // Add the edges of the safe zone to the queue to start growth
@@ -57,7 +62,7 @@ public class MapGeneration : MonoBehaviour
             {
                 if (InBounds(neighbor.x, neighbor.y) && !visited.Contains(neighbor))
                 {
-                    Grid[neighbor.x, neighbor.y] = DetermineTileType(Grid[current.x, current.y], neighbor.x, neighbor.y);
+                    Grid[neighbor.x, neighbor.y].block = DetermineTileType(Grid[current.x, current.y].block, neighbor.x, neighbor.y);
                     visited.Add(neighbor);
                     queue.Enqueue(neighbor);
                 }
@@ -101,7 +106,7 @@ public class MapGeneration : MonoBehaviour
             foreach (var dir in new Vector2Int[] { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right })
             {
                 Vector2Int next = curr + dir;
-                if (InBounds(next.x, next.y) && Grid[next.x, next.y] != WALL && !reachable.Contains(next))
+                if (InBounds(next.x, next.y) && Grid[next.x, next.y].block != WALL && !reachable.Contains(next))
                 {
                     reachable.Add(next);
                     q.Enqueue(next);
@@ -114,9 +119,9 @@ public class MapGeneration : MonoBehaviour
         {
             for (int y = 0; y < size; y++)
             {
-                if (Grid[x, y] != WALL && !reachable.Contains(new Vector2Int(x, y)))
+                if (Grid[x, y].block != WALL && !reachable.Contains(new Vector2Int(x, y)))
                 {
-                    Grid[x, y] = WALL;
+                    Grid[x, y].block = WALL;
                 }
             }
         }
@@ -134,7 +139,7 @@ public class MapGeneration : MonoBehaviour
 
     // Helpers
     private bool InBounds(int x, int y) => x >= 0 && x < size && y >= 0 && y < size;
-    private int GetVal(int x, int y) => InBounds(x, y) ? Grid[x, y] : EMPTY;
+    private int GetVal(int x, int y) => InBounds(x, y) ? Grid[x, y].block : EMPTY;
     private Vector2Int[] GetNeighbors(Vector2Int p) => new Vector2Int[] {
         new Vector2Int(p.x, p.y + 1), new Vector2Int(p.x, p.y - 1),
         new Vector2Int(p.x + 1, p.y), new Vector2Int(p.x - 1, p.y)

@@ -17,6 +17,16 @@ public class PlayerInputHandler : MonoBehaviour
             Debug.Log("movementHandler is null");
     }
 
+    private void OnDisable()
+    {
+        moveAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        moveAction.started -= OnPlayerInput;
+    }
+
 
     private void OnPlayerInput(InputAction.CallbackContext context)
     {

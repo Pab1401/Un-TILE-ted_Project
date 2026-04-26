@@ -2539,8 +2539,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.30249566, y: 0.30249566, z: 0.30249566}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1422831347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2924,7 +2924,7 @@ MonoBehaviour:
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
   GameManager: {fileID: 1158321310}
   enemyCount: 1
-  scorpionCount: 0
+  scorpionCount: 2
 --- !u!1 &1653388636
 GameObject:
   m_ObjectHideFlags: 0

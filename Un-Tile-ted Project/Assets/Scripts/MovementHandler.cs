@@ -17,10 +17,13 @@ public class MovementHandler : MonoBehaviour
         int y = (int)input.y;
         try
         {
-            if (map.Grid[playerPosition[0] + x, playerPosition[1] + y] != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0))
+            // if (map.Grid[playerPosition[0] + x, playerPosition[1] + y].block != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0) && map.Grid[playerPosition[0] + x, playerPosition[1] + y].taken == false)
+            if (map.Grid[playerPosition[0] + x, playerPosition[1] + y].block != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0))
             {
+                // map.Grid[playerPosition[0], playerPosition[1]].taken = false;
                 playerPosition[0] += x;
                 playerPosition[1] += y;
+                // map.Grid[playerPosition[0], playerPosition[1]].taken = true;
                 //Debug.Log("Player position: " + playerPosition[0] + ", " + playerPosition[1]);
                 playerMovementHandler.OnMove(input);
             }

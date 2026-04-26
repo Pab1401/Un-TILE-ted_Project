@@ -38,7 +38,7 @@ public class MapRender : MonoBehaviour
 
         mapParent = new GameObject("GeneratedMap_Visuals");
 
-        int[,] grid = dataGenerator.Grid;
+        MapGeneration.Cells[,] grid = dataGenerator.Grid;
         int size = grid.GetLength(0);
         aiPlacementManager.GenerateEnemySpawnPositions();
 
@@ -50,13 +50,13 @@ public class MapRender : MonoBehaviour
                 // Calculate world position
                 Vector3 pos = new Vector3(x * spacing, 0, y * spacing);
 
-                if (aiPlacementManager.CheckList(x, y) && grid[x, y] == MapGeneration.WALL)
+                if (aiPlacementManager.CheckList(x, y) && grid[x, y].block == MapGeneration.WALL)
                 {
-                    grid[x, y] = MapGeneration.FLOOR; // Change wall to floor if it's an enemy spawn point
+                    grid[x, y].block = MapGeneration.FLOOR; // Change wall to floor if it's an enemy spawn point
                 }
 
                 // 3. Apply Visuals based on Data
-                switch (grid[x, y])
+                switch (grid[x, y].block)
                 {
                     case MapGeneration.WALL:
                         GameObject wall = Instantiate(WallPrefab, pos, Quaternion.identity, mapParent.transform);
@@ -85,10 +85,15 @@ public class MapRender : MonoBehaviour
                         break;
                 }
                 if (aiPlacementManager.CheckList(x, y))
+                {
                     aiPlacementManager.AddSpawnPosition(new Vector2(x, y), pos + Vector3.up * 1.05f); // Adjust height to sit on floor
-
+                    grid[x, y].taken = true;
+                }
                 if (dataGenerator.spawnPos.x == x && dataGenerator.spawnPos.y == y)
+                {
                     playerSpawnPosition = pos + Vector3.up * 1.2f; // Adjust height to sit on floor
+                    // grid[x, y].taken = true;
+                }
 
             }
         }
