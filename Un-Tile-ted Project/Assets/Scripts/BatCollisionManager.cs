@@ -22,6 +22,6 @@ public class BatCollisionManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("Collision Manager Started");
+        // Debug.Log("Collision Manager Started");
     }
 }

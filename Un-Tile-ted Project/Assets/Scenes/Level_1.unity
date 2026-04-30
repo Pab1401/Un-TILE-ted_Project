@@ -2923,8 +2923,8 @@ MonoBehaviour:
   shootLogic: {fileID: 1662120007}
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
   GameManager: {fileID: 1158321310}
-  enemyCount: 1
-  scorpionCount: 0
+  enemyCount: 6
+  scorpionCount: 2
 --- !u!1 &1653388636
 GameObject:
   m_ObjectHideFlags: 0

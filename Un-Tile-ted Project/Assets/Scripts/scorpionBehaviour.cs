@@ -12,7 +12,7 @@ public class scorpionBehaviour : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("Im a scorpion mf");
+        // Debug.Log("Im a scorpion mf");
     }
 
     void Start()

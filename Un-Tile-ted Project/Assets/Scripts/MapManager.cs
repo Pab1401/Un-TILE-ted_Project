@@ -12,7 +12,9 @@ public class MapManager : MonoBehaviour
     {
         // The Sequence: Logic first, then Visuals
         generator.GenerateMap();
+        Debug.Log("Map Generated");
         render.RenderMap();
+        Debug.Log("Map Rendered");
         playerSpawner.SpawnPlayer();
         aiPlacementManager.SpawnEnemies();
     }

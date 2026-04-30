@@ -43,7 +43,7 @@ public class AIplacementManager : MonoBehaviour
 
     public void GenerateEnemySpawnPositions()
     {
-        Debug.Log(enemyList.Count);
+        // Debug.Log(enemyList.Count);
         for (int i = 0; i < enemyCount; i++)
         {
             Vector2 temp = new Vector2(Random.Range(0, dataGenerator.Grid.GetLength(0) - 3), Random.Range(0, dataGenerator.Grid.GetLength(1) - 3));
@@ -56,9 +56,9 @@ public class AIplacementManager : MonoBehaviour
             {
                 enemySpawnPoints.Add(temp);
             }
-            Debug.Log("Enemy added to: " + temp);
+            // Debug.Log("Enemy added to: " + temp);
         }
-        Debug.Log(enemySpawnPoints.Count);
+        // Debug.Log(enemySpawnPoints.Count);
         // enemySpawnPoints.Sort();
     }
 

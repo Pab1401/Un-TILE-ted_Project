@@ -16,7 +16,7 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
         if (takingDamage)
             return;
         health -= damage;
-        Debug.Log("Bat took damage, now has: " + health);
+        // Debug.Log("Bat took damage, now has: " + health);
         StartCoroutine(TookDamage());
         behaviour.repeatTime -= timerDecrease;
         if (health <= 0)
@@ -32,7 +32,10 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
         takingDamage = true;
         behaviour.CancelInvoke();
         yield return new WaitForSeconds(1.5f);
-        behaviour.MoveFunction();
+        if (behaviour.IsChasing)
+            behaviour.InvokeRepeating("ChasePlayer", behaviour.startTime, behaviour.repeatTime);
+        else
+            behaviour.InvokeRepeating("MoveEnemy", behaviour.startTime, behaviour.repeatTime);
         takingDamage = false;
     }
 }

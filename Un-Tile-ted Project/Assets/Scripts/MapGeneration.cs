@@ -30,7 +30,7 @@ public class MapGeneration : MonoBehaviour
         // 1. Define Player Spawn (Bottom-Right)
         // We offset by 1 to ensure it's not literally on the index edge
         spawnPos = new Vector2Int(size - 2, size - 2);
-        Debug.Log("Player Spawn Position: " + spawnPos);
+        // Debug.Log("Player Spawn Position: " + spawnPos);
 
         // 2. Prepare BFS
         HashSet<Vector2Int> visited = new HashSet<Vector2Int>();

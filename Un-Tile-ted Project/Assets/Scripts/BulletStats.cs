@@ -20,11 +20,8 @@ public class BulletStats : MonoBehaviour
         if (other.gameObject.GetComponent<ITakeDamage>() != null)
         {
             ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
-            if (damageable != null)
-            {
-                damageable.TakeDamage(damage);
-            }
-            Destroy(gameObject);    
+            damageable.TakeDamage(damage);
+            Destroy(gameObject);
         }
         
     }
