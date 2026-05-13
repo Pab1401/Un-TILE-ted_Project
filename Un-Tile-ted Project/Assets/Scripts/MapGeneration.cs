@@ -6,7 +6,7 @@ public class MapGeneration : MonoBehaviour
 {
     [Header("Dimensions")]
     [SerializeField] private int size = 33;
-    [SerializeField] private int safeZoneSize = 3; // 3x3 area
+    // [SerializeField] private int safeZoneSize = 3; // 3x3 area
 
     public struct Cells
     {

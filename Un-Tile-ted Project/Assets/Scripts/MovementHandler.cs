@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class MovementHandler : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class MovementHandler : MonoBehaviour
     {
         playerPosition = new int[] { map.spawnPos.x, map.spawnPos.y };
     }
-    public void VerifyDirection(Vector2 input)
+    public async Task VerifyDirection(Vector2 input)
     {
         int x = (int)input.x;
         int y = (int)input.y;
@@ -25,7 +26,7 @@ public class MovementHandler : MonoBehaviour
                 playerPosition[1] += y;
                 // map.Grid[playerPosition[0], playerPosition[1]].taken = true;
                 //Debug.Log("Player position: " + playerPosition[0] + ", " + playerPosition[1]);
-                playerMovementHandler.OnMove(input);
+                await playerMovementHandler.OnMove(input);
             }
         }
         catch (IndexOutOfRangeException)
