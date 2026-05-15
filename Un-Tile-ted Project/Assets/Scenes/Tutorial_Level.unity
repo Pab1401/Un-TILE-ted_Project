@@ -1937,6 +1937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997189022}
+  - component: {fileID: 997189023}
   m_Layer: 0
   m_Name: Vault
   m_TagString: Untagged
@@ -1959,6 +1960,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &997189023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997189021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9055c01f95e9b1d4584771b069baa1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Vault
+  health: 100
+  maxHealth: 100
+  playerDamage: 10
+  bulletBounce: 2
+  maxBullets: 5
+  reloadTime: 4
 --- !u!1 &1045788879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,16 +3117,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIplacementManager
   dataGenerator: {fileID: 899213556}
   mapRender: {fileID: 185668388}
-  enemyPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
+  batPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
   enemySpawnPoints:
-  - {x: 25, y: 25}
+  - {x: 5, y: 5}
   player: {fileID: 1653388636}
   scorpionPrefab: {fileID: 1244017973247475735, guid: dbb622d51533da54dbefabe9b2db105b, type: 3}
   shootLogic: {fileID: 1662120007}
+  snakePrefab: {fileID: 8179561722065041927, guid: 34b3169d0c14bba4480e9f17083719dd, type: 3}
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
   GameManager: {fileID: 1158321310}
-  enemyCount: 1
-  scorpionCount: 1
+  enemyCount: 0
+  scorpionCount: 0
+  snakeCount: 1
 --- !u!1 &1653388636
 GameObject:
   m_ObjectHideFlags: 0
