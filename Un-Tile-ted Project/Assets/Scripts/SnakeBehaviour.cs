@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeBehaviour : MonoBehaviour
 {
     [Header("Dependencies")]
     public MovementHandler player; 
-    public AIMovementHandler movementHandler;
+    [SerializeField] public AIMovementHandler movementHandler;
     public EntityMovementHandler entityMovementHandler;
     
     [Header("Settings")]
-    public float repeatTime = 4f; // Downtime length after completing actions
+    public float repeatTime = 4f; 
     public int[] pos = new int[2];
     
-    private bool isStunned = false; // Match the bat state architecture if needed
+    private bool isStunned = false; 
 
     void Start()
     {
@@ -25,33 +26,30 @@ public class SnakeBehaviour : MonoBehaviour
     {
         while (true)
         {
-            // 1. Trigger the waiting period (downtime)
             yield return new WaitForSeconds(repeatTime);
 
             if (isStunned)
                 continue;
 
-            // 2. Queue and execute a burst of 3 individual, tile-by-tile moves
+            // --- NEW: Turn Memory ---
+            // Tracks where we moved during THIS 3-move burst to prevent pacing back and forth
+            List<Vector2Int> visitedThisBurst = new List<Vector2Int>();
+            // Add our initial starting tile to the burst memory
+            visitedThisBurst.Add(new Vector2Int(pos[0], pos[1]));
+
             for (int i = 0; i < 3; i++)
             {
-                // Prior to moving each tile, check if player is close enough to strike
                 if (IsPlayerAdjacent())
                 {
                     Task attackTask = AttackPlayer();
                     yield return new WaitUntil(() => attackTask.IsCompleted);
-                    
-                    // Instantly trigger the waiting period by breaking out of the 3-move loop
                     break; 
                 }
 
-                // If not attacking, process exactly one smart tile step
-                Task moveTask = TakeSmartStep();
-                
-                // We yield until the single tile movement is completely finished
+                // Pass the memory list into the movement processor
+                Task moveTask = TakeSmartStep(visitedThisBurst);
                 yield return new WaitUntil(() => moveTask.IsCompleted);
 
-                // Optional: Very slight delay between tiles (e.g. 0.05s) if you want them 
-                // to pause for a split second between grid steps, otherwise they fluidly roll into the next tile.
                 yield return new WaitForSeconds(0.05f);
             }
         }
@@ -61,72 +59,82 @@ public class SnakeBehaviour : MonoBehaviour
     {
         int distX = Mathf.Abs(pos[0] - player.playerPosition[0]);
         int distY = Mathf.Abs(pos[1] - player.playerPosition[1]);
-        // Adjacent on a grid means a combined distance of exactly 1 tile
         return (distX + distY == 1);
     }
 
     private async Task AttackPlayer()
     {
-        // Direction vector pushing towards player
         Vector2 attackDir = new Vector2(player.playerPosition[0] - pos[0], player.playerPosition[1] - pos[1]);
-        
-        // Bump animation: moves 1 tile towards player, then 1 tile back
         await entityMovementHandler.OnMove(attackDir);
         await entityMovementHandler.OnMove(-attackDir);
-        
-        Debug.Log("Snake Attacked the Player!");
     }
 
-    private async Task TakeSmartStep()
-{
-    Vector2 bestDir = Vector2.zero;
-    float bestScore = float.MinValue;
-
-    // Cardinally available step options
-    Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-
-    foreach (Vector2 dir in directions)
+    private async Task TakeSmartStep(List<Vector2Int> visitedThisBurst)
     {
-        // Use your existing AIMovementHandler boundary/wall validations from current position
-        if (movementHandler.VerifyDirection(dir, pos))
+        Vector2 bestDir = Vector2.zero;
+        float bestScore = float.MinValue;
+
+        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+        int size = movementHandler.map.Grid.GetLength(0);
+
+        // Calculate current distance to player BEFORE moving
+        float currentDistToPlayer = Vector2.Distance(
+            new Vector2(pos[0], pos[1]), 
+            new Vector2(player.playerPosition[0], player.playerPosition[1])
+        );
+
+        foreach (Vector2 dir in directions)
         {
             int targetX = pos[0] + (int)dir.x;
             int targetY = pos[1] + (int)dir.y;
 
-            // Calculate distance to player if we step here
-            float distToPlayer = Vector2.Distance(
-                new Vector2(targetX, targetY), 
-                new Vector2(player.playerPosition[0], player.playerPosition[1])
-            );
-
-            float score = 0f;
-
-            // Rule 1: Moving closer to the player increases score
-            score += distToPlayer * 10f; 
-
-            // Rule 2: Prefer Forest / Grass tiles (MapGeneration.FOREST = 3)
-            if (movementHandler.map.Grid[targetX, targetY].block == 3)
+            if (targetX >= 0 && targetX < size && targetY >= 0 && targetY < size)
             {
-                score += 45f; // Weighted highly to stay hidden/stick to grass
+                if (movementHandler.map.Grid[targetX, targetY].block != 2)
+                {
+                    float distAfterMove = Vector2.Distance(
+                        new Vector2(targetX, targetY), 
+                        new Vector2(player.playerPosition[0], player.playerPosition[1])
+                    );
+
+                    float score = 0f;
+
+                    // Core Rule: Closer to player is always fundamentally better
+                    score -= distAfterMove * 10f; 
+
+                    // FIX 1: Directional Filtering 
+                    // Only grant the Grass Bonus (+35) if this tile keeps us closer OR equal distance.
+                    // This blocks the snake from moving BACKWARD away from you just to stay on grass.
+                    if (distAfterMove <= currentDistToPlayer && movementHandler.map.Grid[targetX, targetY].block == 3)
+                    {
+                        score += 35f; 
+                    }
+
+                    // FIX 2: Anti-Backtracking
+                    // If the tile was already stepped on during this 3-move turn, tank its score
+                    if (visitedThisBurst.Contains(new Vector2Int(targetX, targetY)))
+                    {
+                        score -= 150f; 
+                    }
+
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestDir = dir;
+                    }
+                }
             }
+        }
 
-            if (score > bestScore)
+        if (bestDir != Vector2.zero)
+        {
+            if (movementHandler.VerifyDirection(bestDir, pos))
             {
-                bestScore = score;
-                bestDir = dir;
+                // Record this newly targeted position into our short-term turn memory
+                visitedThisBurst.Add(new Vector2Int(pos[0], pos[1]));
+                
+                await entityMovementHandler.OnMove(bestDir);
             }
         }
     }
-
-    if (bestDir != Vector2.zero)
-    {
-        // --- FIX HERE: Instantly update the grid tracker positions ---
-        // This ensures step #2 evaluates options relative to where step #1 just moved!
-        pos[0] += (int)bestDir.x;
-        pos[1] += (int)bestDir.y;
-
-        // Perform the physical movement interpolation one tile forward
-        await entityMovementHandler.OnMove(bestDir);
-    }
-}
 }
