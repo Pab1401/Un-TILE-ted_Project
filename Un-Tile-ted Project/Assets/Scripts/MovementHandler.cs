@@ -8,31 +8,50 @@ public class MovementHandler : MonoBehaviour
     [SerializeField] private EntityMovementHandler playerMovementHandler;
     public int[] playerPosition = new int[2];
 
+    private Task movementQueue = Task.CompletedTask;
+
     public void SetPlayerPosition()
     {
         playerPosition = new int[] { map.spawnPos.x, map.spawnPos.y };
     }
-    public async Task VerifyDirection(Vector2 input)
+
+    public async Task AddMoveToQueue(Vector2 Input)
     {
-        int x = (int)input.x;
-        int y = (int)input.y;
-        try
+        Task previousMove = movementQueue;
+    
+        Task currentMove = ProcessQueueMove(Input, previousMove);
+        movementQueue = currentMove;
+    
+        await currentMove;
+    }
+
+    private async Task ProcessQueueMove(Vector2 Input, Task previousMove)
+    {
+    // Wait for the move that was ahead of us in line to finish
+    await previousMove;
+
+    int x = (int)Input.x;
+    int y = (int)Input.y;
+    
+    try
+    {
+        // Boundary and block checks
+        if (playerPosition[0] + x >= 0 && playerPosition[0] + x < map.Grid.GetLength(0) &&
+            playerPosition[1] + y >= 0 && playerPosition[1] + y < map.Grid.GetLength(1))
         {
-            // if (map.Grid[playerPosition[0] + x, playerPosition[1] + y].block != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0) && map.Grid[playerPosition[0] + x, playerPosition[1] + y].taken == false)
-            if (map.Grid[playerPosition[0] + x, playerPosition[1] + y].block != 2 && playerPosition[0] + x <= map.Grid.GetLength(1) && playerPosition[1] + y <= map.Grid.GetLength(0))
+            if (map.Grid[playerPosition[0] + x, playerPosition[1] + y].block != 2)
             {
-                // map.Grid[playerPosition[0], playerPosition[1]].taken = false;
                 playerPosition[0] += x;
                 playerPosition[1] += y;
-                // map.Grid[playerPosition[0], playerPosition[1]].taken = true;
-                //Debug.Log("Player position: " + playerPosition[0] + ", " + playerPosition[1]);
-                await playerMovementHandler.OnMove(input);
+                await playerMovementHandler.OnMove(Input);
             }
         }
-        catch (IndexOutOfRangeException)
-        {
-            //Debug.Log(ex.Message);
-        }
+    }
+    catch (IndexOutOfRangeException) { }
+    }
+    public async Task VerifyDirection(Vector2 input)
+    {
+        await AddMoveToQueue(input);
     }
 
 

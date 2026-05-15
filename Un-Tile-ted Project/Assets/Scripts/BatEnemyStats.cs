@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using UnityEngine;
 
 public class BatEnemyStats : MonoBehaviour, ITakeDamage
@@ -10,9 +11,17 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
     public float damage = 8f;
     public float timerDecrease = 0.1f;
     private bool takingDamage = false;
+
+    public bool isStunned
+    {
+        get { return behaviour.IsStunned; }
+        set { behaviour.IsStunned = value; }
+    }
     
     public void TakeDamage(float damage)
     {
+        if (isStunned)
+            return;
         if (takingDamage)
             return;
         health -= damage;
@@ -28,14 +37,12 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
 
     public IEnumerator TookDamage()
     {
+        isStunned = true;
         // Debug.Log("Taking damage");
         takingDamage = true;
-        behaviour.CancelInvoke();
+        //behaviour.CancelInvoke();
         yield return new WaitForSeconds(1.5f);
-        if (behaviour.IsChasing)
-            behaviour.InvokeRepeating("ChasePlayer", behaviour.startTime, behaviour.repeatTime);
-        else
-            behaviour.InvokeRepeating("MoveEnemy", behaviour.startTime, behaviour.repeatTime);
         takingDamage = false;
+        isStunned = false;
     }
 }

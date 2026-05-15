@@ -4,16 +4,22 @@ public class ScorpionCollisionManager : MonoBehaviour
 {
     public ScorpionStats stats;
 
-    void OnTriggerEnter(Collider other)
+    async void OnTriggerEnter(Collider other)
     {
         ITakeDamage damageable = other.gameObject.GetComponent<ITakeDamage>();
-        if (other.GetComponent<ITakeDamage>() == null || other.gameObject.tag != "Player")
+        if (damageable == null || !other.gameObject.CompareTag("Player"))
             return;
+
         damageable.TakeDamage(stats.CollisionDamage);
-        Vector2 playerInput = other.gameObject.GetComponent<PlayerInputHandler>().playerInput;
-                MovementHandler playerMove = other.gameObject.GetComponentInChildren<MovementHandler>();
-                if (playerMove == null)
-                    Debug.Log("PlayerMove is null");
-                playerMove.VerifyDirection(-playerInput);
+    
+        PlayerInputHandler inputHandler = other.gameObject.GetComponent<PlayerInputHandler>();
+        MovementHandler playerMove = other.gameObject.GetComponentInChildren<MovementHandler>();
+
+        if (inputHandler != null && playerMove != null)
+        {
+            inputHandler.isMoving = true;
+            await playerMove.VerifyDirection(-inputHandler.playerInput);
+            inputHandler.isMoving = false;
+        }
     }
 }

@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        PlayerStatus playerStats = FindFirstObjectByType<PlayerStatus>(); 
+        Vault.Instance.SaveStats(playerStats.Health, playerStats.MaxHealth,playerStats.PlayerDamage, playerStats.bulletBounce, playerStats.maxBullets, playerStats.reloadTime);
         SceneManager.LoadScene(nextScene);
     }
 

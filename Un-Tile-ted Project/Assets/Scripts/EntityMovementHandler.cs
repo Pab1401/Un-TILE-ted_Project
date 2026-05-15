@@ -21,13 +21,13 @@ public class EntityMovementHandler : MonoBehaviour
 
     async Task MoveAsync(Vector3 pos)
     {
-        while (movementTarget.transform.position != pos)
+        while (Vector3.Distance(movementTarget.transform.position, pos) > 0.001f)
         {
             float step = speed * Time.deltaTime;
             movementTarget.transform.position = Vector3.MoveTowards(movementTarget.transform.position, pos, step);
 
             await Task.Yield();
         }
-        return;
+        movementTarget.transform.position = pos;
     }
 }

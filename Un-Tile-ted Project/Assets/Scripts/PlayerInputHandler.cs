@@ -39,7 +39,7 @@ public class PlayerInputHandler : MonoBehaviour
     private async Task PlayerMove(Vector2 playerInput)
     {
         isMoving = true;
-        await moveHandler.VerifyDirection(playerInput);
+        await moveHandler.AddMoveToQueue(playerInput);
         isMoving = false;
     }
 
