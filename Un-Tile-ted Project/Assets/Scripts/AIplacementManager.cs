@@ -1,22 +1,26 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AIplacementManager : MonoBehaviour
 {
     [SerializeField] private MapGeneration dataGenerator;
     [SerializeField] private MapRender mapRender;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject batPrefab;
     [SerializeField] public List<Vector2> enemySpawnPoints;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject scorpionPrefab;
     [SerializeField] private ShootLogic shootLogic;
+
+    [SerializeField] private GameObject snakePrefab;
     [SerializeField] private GameObject scorpionProjectilePrefab;
     [SerializeField] private GameManager GameManager;
 
     [SerializeField] private int enemyCount;
     //[SerializeField] private int batCount;
     [SerializeField] private int scorpionCount;
+    [SerializeField] private int snakeCount;
 
     private struct EnemySpawns
     {
@@ -66,7 +70,29 @@ public class AIplacementManager : MonoBehaviour
     {
         foreach (EnemySpawns EnSp in enemyList)
         {
-            if (scorpionCount > 0)
+            if (snakeCount > 0)
+            {
+                GameObject enemy = Instantiate(snakePrefab, EnSp.SpawnPosition, Quaternion.identity);
+                
+                SnakeBehaviour behaviour = enemy.GetComponent<SnakeBehaviour>();
+                behaviour.pos = new int[] {(int)EnSp.SpawnPoint.x, (int)EnSp.SpawnPoint.y};
+
+                // enemy.AddComponent<SnakeStats>();
+                // enemy.AddComponent<CollisionManager>();
+                
+                behaviour.player = player.GetComponentInChildren<MovementHandler>();
+                
+                behaviour.movementHandler = enemy.AddComponent<AIMovementHandler>();
+                behaviour.movementHandler.map = dataGenerator;
+                
+                behaviour.entityMovementHandler = enemy.AddComponent<EntityMovementHandler>();
+                behaviour.entityMovementHandler.movementTarget = enemy;
+                behaviour.entityMovementHandler.r = mapRender;
+
+                snakeCount--;                
+
+            }
+            else if (scorpionCount > 0)
             {
                 GameObject enemy = Instantiate(scorpionPrefab, EnSp.SpawnPosition, Quaternion.identity);
                 scorpionBehaviour ScorpionScript = enemy.AddComponent<scorpionBehaviour>();
@@ -85,7 +111,7 @@ public class AIplacementManager : MonoBehaviour
             }
             else
             {
-                GameObject enemy = Instantiate(enemyPrefab, EnSp.SpawnPosition, Quaternion.identity);
+                GameObject enemy = Instantiate(batPrefab, EnSp.SpawnPosition, Quaternion.identity);
                 batBehaviour batScript = enemy.GetComponent<batBehaviour>();
                 batScript.movementHandler = enemy.AddComponent<AIMovementHandler>();
                 batScript.entityMovementHandler = enemy.AddComponent<EntityMovementHandler>();

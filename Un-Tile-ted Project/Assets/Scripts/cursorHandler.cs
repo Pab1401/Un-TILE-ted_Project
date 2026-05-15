@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class cursorHandler : MonoBehaviour
 {
+    public static event System.Action<int> OnPlayerShoot;
     public float cursorDistance = 1f;
     [SerializeField] private Transform cursorObject;
     [SerializeField] private ShootLogic shootLogic;
@@ -63,6 +64,7 @@ public class cursorHandler : MonoBehaviour
         Vector3 targetPosition = new Vector3(cursorObject.transform.localPosition.x, 0, cursorObject.transform.localPosition.y).normalized;
         if (player.GetComponent<PlayerStatus>().CurrentBullets > 0)
         {
+            OnPlayerShoot?.Invoke(player.GetComponent<PlayerStatus>().CurrentBullets);
             player.GetComponent<PlayerStatus>().CurrentBullets--;
             shootLogic.Shoot(player.transform.position, player.transform.position + targetPosition, damage, bulletPrefab, player, bulletBounce);
         }

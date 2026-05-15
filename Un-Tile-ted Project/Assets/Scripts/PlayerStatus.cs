@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
 {
     public static event System.Action<float> OnHealthChanged;
+    public static event System.Action<bool> OnPlayerReload;
     private GameManager manager;
     // Set Stats
     private float health = 100;
@@ -78,6 +79,7 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
     }
     IEnumerator Reload()
     {
+        OnPlayerReload?.Invoke(true);
         yield return new WaitForSeconds(reloadTime);
         currentBullets = maxBullets;
     }
