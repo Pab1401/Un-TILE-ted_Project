@@ -10,6 +10,8 @@ public class SnakeBehaviour : MonoBehaviour
     public MovementHandler player; 
     [SerializeField] public AIMovementHandler movementHandler;
     public EntityMovementHandler entityMovementHandler;
+
+    public SpriteRenderer spriteRenderer;
     
     [Header("Settings")]
     public float repeatTime = 4f; 
@@ -19,6 +21,7 @@ public class SnakeBehaviour : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(ActionLoop());
     }
 
@@ -39,35 +42,31 @@ public class SnakeBehaviour : MonoBehaviour
 
             for (int i = 0; i < 3; i++)
             {
-                if (IsPlayerAdjacent())
-                {
-                    Task attackTask = AttackPlayer();
-                    yield return new WaitUntil(() => attackTask.IsCompleted);
-                    break; 
-                }
-
+                if (IsStunned)
+                    break;
                 // Pass the memory list into the movement processor
                 Task moveTask = TakeSmartStep(visitedThisBurst);
                 yield return new WaitUntil(() => moveTask.IsCompleted);
+
 
                 yield return new WaitForSeconds(0.05f);
             }
         }
     }
 
-    private bool IsPlayerAdjacent()
-    {
-        int distX = Mathf.Abs(pos[0] - player.playerPosition[0]);
-        int distY = Mathf.Abs(pos[1] - player.playerPosition[1]);
-        return (distX + distY == 1);
-    }
+    // private bool IsPlayerAdjacent()
+    // {
+    //     int distX = Mathf.Abs(pos[0] - player.playerPosition[0]);
+    //     int distY = Mathf.Abs(pos[1] - player.playerPosition[1]);
+    //     return (distX + distY == 1);
+    // }
 
-    private async Task AttackPlayer()
-    {
-        Vector2 attackDir = new Vector2(player.playerPosition[0] - pos[0], player.playerPosition[1] - pos[1]);
-        await entityMovementHandler.OnMove(attackDir);
-        await entityMovementHandler.OnMove(-attackDir);
-    }
+    // private async Task AttackPlayer()
+    // {
+    //     Vector2 attackDir = new Vector2(player.playerPosition[0] - pos[0], player.playerPosition[1] - pos[1]);
+    //     await entityMovementHandler.OnMove(attackDir);
+    //     await entityMovementHandler.OnMove(-attackDir);
+    // }
 
     private async Task TakeSmartStep(List<Vector2Int> visitedThisBurst)
     {
@@ -134,6 +133,15 @@ public class SnakeBehaviour : MonoBehaviour
                 visitedThisBurst.Add(new Vector2Int(pos[0], pos[1]));
                 
                 await entityMovementHandler.OnMove(bestDir);
+                if (movementHandler.map.Grid[pos[0], pos[1]].block == 3)
+                {
+                    // Debug.Log("Stepped on grass, getting bonus!");
+                    spriteRenderer.enabled = false;
+                }
+                else
+                {
+                    spriteRenderer.enabled = true;
+                }
             }
         }
     }

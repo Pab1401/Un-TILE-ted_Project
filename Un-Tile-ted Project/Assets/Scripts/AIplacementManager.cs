@@ -81,7 +81,8 @@ public class AIplacementManager : MonoBehaviour
                 stats.behaviour = behaviour;
                 stats.manager = GameManager;
 
-                enemy.AddComponent<SnakeCollisionManager>();
+                SnakeCollisionManager collider = enemy.AddComponent<SnakeCollisionManager>();
+                collider.stats = stats;
                 
                 behaviour.player = player.GetComponentInChildren<MovementHandler>();
                 
