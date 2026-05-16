@@ -77,8 +77,11 @@ public class AIplacementManager : MonoBehaviour
                 SnakeBehaviour behaviour = enemy.GetComponent<SnakeBehaviour>();
                 behaviour.pos = new int[] {(int)EnSp.SpawnPoint.x, (int)EnSp.SpawnPoint.y};
 
-                // enemy.AddComponent<SnakeStats>();
-                // enemy.AddComponent<CollisionManager>();
+                SnakeStats stats = enemy.AddComponent<SnakeStats>();
+                stats.behaviour = behaviour;
+                stats.manager = GameManager;
+
+                enemy.AddComponent<SnakeCollisionManager>();
                 
                 behaviour.player = player.GetComponentInChildren<MovementHandler>();
                 

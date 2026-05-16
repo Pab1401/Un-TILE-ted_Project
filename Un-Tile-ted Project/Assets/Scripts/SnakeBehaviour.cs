@@ -15,7 +15,7 @@ public class SnakeBehaviour : MonoBehaviour
     public float repeatTime = 4f; 
     public int[] pos = new int[2];
     
-    private bool isStunned = false; 
+    public bool IsStunned = false; 
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class SnakeBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(repeatTime);
 
-            if (isStunned)
+            if (IsStunned)
                 continue;
 
             // --- NEW: Turn Memory ---
