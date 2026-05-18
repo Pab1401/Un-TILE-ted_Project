@@ -25,6 +25,7 @@ public class BatStatsForBoss : MonoBehaviour
         if (takingDamage)
             return;
         health -= damage;
+        AudioManager.Instance.PlayBatHurt();
         // Debug.Log("Bat took damage, now has: " + health);
         StartCoroutine(TookDamage());
         behaviour.repeatTime -= timerDecrease;

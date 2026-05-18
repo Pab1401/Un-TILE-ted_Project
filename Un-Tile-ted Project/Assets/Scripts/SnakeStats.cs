@@ -25,6 +25,7 @@ public class SnakeStats : MonoBehaviour, ITakeDamage
         if (takingDamage)
             return;
         health -= damage;
+        AudioManager.Instance.PlaySnakeHurt();
         // Debug.Log("Snaker took damage, now has: " + health);
         StartCoroutine(TookDamage());
         behaviour.repeatTime -= timerDecrease;

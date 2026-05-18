@@ -53,6 +53,15 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
         if (invincible)
             return;
         health -=  damage;
+        if (health <= 0)
+        {
+            AudioManager.Instance.PlayPlayerDeath();
+            // Lógica de muerte...
+        }
+        else
+        {
+            AudioManager.Instance.PlayPlayerHurt();
+        }
         Debug.Log("Player took damage, now has: " + health);
         invincible = true;
         StartCoroutine(InvincibilityFrames());
