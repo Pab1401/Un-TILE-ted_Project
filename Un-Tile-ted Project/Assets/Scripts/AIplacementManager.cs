@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+//using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class AIplacementManager : MonoBehaviour
 {
@@ -15,12 +17,15 @@ public class AIplacementManager : MonoBehaviour
 
     [SerializeField] private GameObject snakePrefab;
     [SerializeField] private GameObject scorpionProjectilePrefab;
+    [SerializeField] private GameObject bossPrefab;
     [SerializeField] private GameManager GameManager;
 
     [SerializeField] private int enemyCount;
     //[SerializeField] private int batCount;
     [SerializeField] private int scorpionCount;
     [SerializeField] private int snakeCount;
+    private bool Boss;
+    public int middle;
 
     private struct EnemySpawns
     {
@@ -47,6 +52,7 @@ public class AIplacementManager : MonoBehaviour
 
     public void GenerateEnemySpawnPositions()
     {
+        Boss = dataGenerator.Boss;
         // Debug.Log(enemyList.Count);
         for (int i = 0; i < enemyCount; i++)
         {
@@ -130,8 +136,26 @@ public class AIplacementManager : MonoBehaviour
                 enemyStats.manager = GameManager;
             }
         }
+        if (Boss)
+        {
+            middle = dataGenerator.Grid.GetLength(0) / 2;
+            bossPrefab.GetComponent<BossStats>().manager = FindFirstObjectByType<GameManager>();
+            bossPrefab.GetComponent<BossBehaviour>().player = player;
+            Instantiate(bossPrefab, new Vector3(mapRender.blockPositions[middle, (middle*2)].x, mapRender.blockPositions[middle, (middle*2)].y + 0.75f, mapRender.blockPositions[middle, (middle*2)].z + 3f), Quaternion.identity);
+            BoxCollider bossCollider = bossPrefab.GetComponent<BoxCollider>();
+            bossCollider.size = new Vector3(middle*2 * 1.2f, 2f, 0.5f);
+            GameManager.EnemyCount++; // Increment enemy count for the boss
+            // if (bossPrefab.GetComponent<ShootLogic>() == null)
+            // {
+            //     ShootLogic shooter = bossPrefab.AddComponent<ShootLogic>();
+            // }
+            
+            // mapRender.blockPositions
+            
+            
+        }
 
-
+        #region OldCode
         // if (enemyDecision == 0)
         // {
         //     foreach (EnemySpawns EnSp in enemyList)
@@ -172,6 +196,7 @@ public class AIplacementManager : MonoBehaviour
         //         //colManager.projectilePrefab = scorpionProjectilePrefab;
         //     }
         // }
+        #endregion
 
         GameManager.EnemyCount = enemySpawnPoints.Count;
         //GameManager.EnemyCount = enemyList.GetRange();

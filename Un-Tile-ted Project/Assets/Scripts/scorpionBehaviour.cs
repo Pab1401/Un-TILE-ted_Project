@@ -22,7 +22,6 @@ public class scorpionBehaviour : MonoBehaviour
 
     void Shoot()
     {
-        
         shootLogic.Shoot(transform.position, player.transform.position, stats.BulletDamage, projectilePrefab, gameObject);
     }
 

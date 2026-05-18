@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class BatCollisionManager : MonoBehaviour
+public class BatCollisionForBoss : MonoBehaviour
 {
-    public BatEnemyStats batStats;
+    public BatStatsForBoss batStats;
 
     async void OnTriggerEnter(Collider other)
     {
@@ -27,9 +26,5 @@ public class BatCollisionManager : MonoBehaviour
         
             batStats.StartCoroutine(batStats.TookDamage());
         }
-    }
-    void Start()
-    {
-        // Debug.Log("Collision Manager Started");
     }
 }

@@ -55,13 +55,18 @@ Assets/Scripts/
  AIplacementManager.cs
  AudioManager.cs
  batBehaviour.cs
+ BatCollisionForBoss.cs
  BatCollisionManager.cs
  BatEnemyStats.cs
+ BatStatsForBoss.cs
  BossBehaviour.cs
+ BossEnemyInstancer.cs
+ BossShooter.cs
  BossStats.cs
  BulletStats.cs
  CameraMove.cs
  CanCollide.cs
+ CreateBeam.cs
  cursorHandler.cs
  EntityMovementHandler.cs
  GameManager.cs
@@ -85,6 +90,7 @@ Assets/Scripts/
  SnakeStats.cs
  SpriteRotator.cs
  TakeDamageInterface.cs
+ TorchLightFlicker.cs
  Vault.cs
  WallScript.cs
 Assets/TutorialInfo/Scripts/Readme.cs

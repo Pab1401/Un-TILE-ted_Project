@@ -7,7 +7,7 @@ public class MapGeneration : MonoBehaviour
     [Header("Dimensions")]
     [SerializeField] private int size = 33;
     // [SerializeField] private int safeZoneSize = 3; // 3x3 area
-
+    public bool Boss = false;
     public struct Cells
     {
         public int block;
@@ -77,8 +77,8 @@ public class MapGeneration : MonoBehaviour
     private int DetermineTileType(int parentType, int x, int y)
     {
         float roll = Random.value;
-        float wallChance = 0.15f;
-        float forestChance = 0.15f;
+        float wallChance = Boss? 0.05f : 0.15f;
+        float forestChance = Boss? 0.25f : 0.15f;
 
         // Clustering Logic
         if (parentType == WALL) wallChance -= 0.05f;

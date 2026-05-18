@@ -31,12 +31,17 @@ public class MapRender : MonoBehaviour
 
     private GameObject mapParent;
 
+    public Vector3[,] blockPositions;
+
+    
     public void RenderMap()
     {
         // 1. Clean up old map if it exists
         if (mapParent != null) Destroy(mapParent);
 
         mapParent = new GameObject("GeneratedMap_Visuals");
+
+        blockPositions = new Vector3[dataGenerator.Grid.GetLength(0), dataGenerator.Grid.GetLength(1)];
 
         MapGeneration.Cells[,] grid = dataGenerator.Grid;
         int size = grid.GetLength(0);
@@ -49,6 +54,8 @@ public class MapRender : MonoBehaviour
             {
                 // Calculate world position
                 Vector3 pos = new Vector3(x * spacing, 0, y * spacing);
+                blockPositions[x, y] = pos; 
+                    
 
                 if (aiPlacementManager.CheckList(x, y) && grid[x, y].block == MapGeneration.WALL)
                 {
