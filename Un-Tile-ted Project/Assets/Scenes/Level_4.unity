@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGeneration
   size: 33
-  Boss: 0
+  Boss: 1
   spawnPos: {x: 0, y: 0}
 --- !u!4 &899213557
 Transform:
