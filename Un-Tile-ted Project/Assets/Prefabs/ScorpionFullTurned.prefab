@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9047971373023114024}
   - component: {fileID: 9103739687329821619}
   m_Layer: 0
-  m_Name: Scorpion
+  m_Name: ScorpionFullTurned
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1788512926, guid: 6b361c5bd6cbc7945b475c96b1f6a2de, type: 3}
+  m_Sprite: {fileID: 857369135, guid: 33cc5f6e8bdda474b99ffdc92255170c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

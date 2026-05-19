@@ -4918,7 +4918,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1058858994, guid: 8033ba01c83119749b4f2110209a334c, type: 3}
+  m_Sprite: {fileID: 838189358, guid: 6f8b214004f376645a87609b8746799a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4952,10 +4952,10 @@ GameObject:
   - component: {fileID: 7955108631674681870}
   - component: {fileID: 3447153104461473663}
   - component: {fileID: 5386036736614257715}
+  - component: {fileID: 4264805713474424438}
   - component: {fileID: 5705429772790968340}
-  - component: {fileID: 8647680124705303356}
   m_Layer: 0
-  m_Name: BossBat
+  m_Name: BatHalf
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5058,6 +5058,24 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4264805713474424438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3224017341082361379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3cf4d85b68e6244aaf1a172660c191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::batBehaviour
+  player: {fileID: 0}
+  movementHandler: {fileID: 0}
+  entityMovementHandler: {fileID: 0}
+  startTime: 0.5
+  repeatTime: 0.6
+  pos: 0000000000000000
 --- !u!54 &5705429772790968340
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5085,24 +5103,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8647680124705303356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3224017341082361379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc3cf4d85b68e6244aaf1a172660c191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::batBehaviour
-  player: {fileID: 0}
-  movementHandler: {fileID: 0}
-  entityMovementHandler: {fileID: 0}
-  startTime: 1
-  repeatTime: 1.2
-  pos: 0000000000000000
 --- !u!1 &8176316836879787728
 GameObject:
   m_ObjectHideFlags: 0
