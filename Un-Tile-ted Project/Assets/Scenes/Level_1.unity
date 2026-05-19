@@ -4151,12 +4151,7 @@ MonoBehaviour:
   dataGenerator: {fileID: 899213556}
   mapRender: {fileID: 185668388}
   batPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
-  enemySpawnPoints:
-  - {x: -5, y: 5}
-  - {x: 10, y: -5}
-  - {x: 14, y: 9}
-  - {x: -1, y: 19}
-  - {x: 9, y: 4}
+  enemySpawnPoints: []
   player: {fileID: 1653388636}
   scorpionPrefab: {fileID: 1244017973247475735, guid: dbb622d51533da54dbefabe9b2db105b, type: 3}
   shootLogic: {fileID: 1662120007}
@@ -4164,7 +4159,7 @@ MonoBehaviour:
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
   bossPrefab: {fileID: 3121635227820515130, guid: 1078fe36883ab274bb89fef1f41e655a, type: 3}
   GameManager: {fileID: 1158321310}
-  enemyCount: 3
+  enemyCount: 4
   scorpionCount: 2
   snakeCount: 1
   middle: 0
