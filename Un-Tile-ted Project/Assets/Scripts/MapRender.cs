@@ -14,7 +14,7 @@ public class MapRender : MonoBehaviour
 
     [Header("Visual Settings")]
     [SerializeField] public float spacing = 1.1f;
-    [SerializeField] private int wallBorderThickness = 3; 
+    [SerializeField] private int wallBorderThickness = 16; 
     public bool isBossRoom; // Check this to disable the outside walls
 
     [Header("Materials")]

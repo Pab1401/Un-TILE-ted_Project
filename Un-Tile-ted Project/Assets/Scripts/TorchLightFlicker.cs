@@ -6,8 +6,8 @@ public class TorchLightFlicker : MonoBehaviour
     private Light torchLight;
 
     [Header("Base Settings")]
-    [SerializeField] private float baseIntensity = 2f;
-    [SerializeField] private float baseRange = 8f;
+    [SerializeField] private float baseIntensity = 10f;
+    [SerializeField] private float baseRange = 85;
 
     [Header("Flicker Settings")]
     [SerializeField] private float intensityVariation = 0.3f;

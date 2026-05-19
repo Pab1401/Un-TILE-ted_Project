@@ -200,7 +200,7 @@ MonoBehaviour:
   WallPrefab: {fileID: 4665568860243863614, guid: 16750797facf5f3408884e2424f149c6, type: 3}
   ForestPrefab: {fileID: 6677404834392293815, guid: a5a4d6182406f1f40a04f24832916d6d, type: 3}
   spacing: 1.1
-  wallBorderThickness: 3
+  wallBorderThickness: 16
   isBossRoom: 0
   FloorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
   WallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
@@ -4160,9 +4160,9 @@ MonoBehaviour:
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 824633e52a7d06e4995098daed0e11ef, type: 3}
   bossPrefab: {fileID: 3121635227820515130, guid: 1078fe36883ab274bb89fef1f41e655a, type: 3}
   GameManager: {fileID: 1158321310}
-  enemyCount: 2
-  scorpionCount: 3
-  snakeCount: 0
+  enemyCount: 9
+  scorpionCount: 4
+  snakeCount: 3
   middle: 0
 --- !u!1 &1652618196
 GameObject:
@@ -4564,8 +4564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0847ab087a1d2544a8962c04e4fedcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TorchLightFlicker
-  baseIntensity: 2
-  baseRange: 10
+  baseIntensity: 10
+  baseRange: 5
   intensityVariation: 0.5
   rangeVariation: 1.57
   flickerSpeed: 13.51

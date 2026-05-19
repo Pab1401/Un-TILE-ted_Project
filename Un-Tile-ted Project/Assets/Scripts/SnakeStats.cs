@@ -8,7 +8,7 @@ public class SnakeStats : MonoBehaviour, ITakeDamage
     public SnakeBehaviour behaviour;
     public GameManager manager;
     private float health = 40f;
-    public float damage = 14f;
+    public float damage = 10f;
     public float timerDecrease = 0.1f;
     private bool takingDamage = false;
 

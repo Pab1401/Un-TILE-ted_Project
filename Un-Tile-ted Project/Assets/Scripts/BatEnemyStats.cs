@@ -8,7 +8,7 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
     public batBehaviour behaviour;
     public GameManager manager;
     private float health = 50f;
-    public float damage = 8f;
+    public float damage = 5f;
     public float timerDecrease = 0.1f;
     private bool takingDamage = false;
 
@@ -25,6 +25,7 @@ public class BatEnemyStats : MonoBehaviour, ITakeDamage
         if (takingDamage)
             return;
         health -= damage;
+        AudioManager.Instance.PlayBatHurt();
         // Debug.Log("Bat took damage, now has: " + health);
         StartCoroutine(TookDamage());
         behaviour.repeatTime -= timerDecrease;

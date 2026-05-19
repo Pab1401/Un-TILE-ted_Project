@@ -304,7 +304,7 @@ MonoBehaviour:
   WallPrefab: {fileID: 4665568860243863614, guid: 16750797facf5f3408884e2424f149c6, type: 3}
   ForestPrefab: {fileID: 6677404834392293815, guid: a5a4d6182406f1f40a04f24832916d6d, type: 3}
   spacing: 1.1
-  wallBorderThickness: 3
+  wallBorderThickness: 16
   isBossRoom: 0
   FloorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
   WallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
@@ -1858,7 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676ce4ff53e9a7d4795899a0756bdbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGeneration
-  size: 33
+  size: 21
   Boss: 0
   spawnPos: {x: 31, y: 31}
 --- !u!4 &899213557
@@ -4152,7 +4152,11 @@ MonoBehaviour:
   mapRender: {fileID: 185668388}
   batPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
   enemySpawnPoints:
-  - {x: 5, y: 5}
+  - {x: -5, y: 5}
+  - {x: 10, y: -5}
+  - {x: 14, y: 9}
+  - {x: -1, y: 19}
+  - {x: 9, y: 4}
   player: {fileID: 1653388636}
   scorpionPrefab: {fileID: 1244017973247475735, guid: dbb622d51533da54dbefabe9b2db105b, type: 3}
   shootLogic: {fileID: 1662120007}
@@ -4160,9 +4164,9 @@ MonoBehaviour:
   scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
   bossPrefab: {fileID: 3121635227820515130, guid: 1078fe36883ab274bb89fef1f41e655a, type: 3}
   GameManager: {fileID: 1158321310}
-  enemyCount: 0
-  scorpionCount: 0
-  snakeCount: 0
+  enemyCount: 3
+  scorpionCount: 2
+  snakeCount: 1
   middle: 0
 --- !u!1 &1652618196
 GameObject:
