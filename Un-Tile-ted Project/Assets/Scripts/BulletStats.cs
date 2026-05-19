@@ -5,6 +5,7 @@ public class BulletStats : MonoBehaviour
     public float damage;
     public GameObject shooter;
     public int bounce;
+    public bool canIgnoreWalls = false;
 
     void OnTriggerEnter(Collider other)
     {
@@ -14,8 +15,12 @@ public class BulletStats : MonoBehaviour
             return;
         if (other.gameObject.GetComponent<ICanCollide>() != null)
         {
+            if (other.gameObject.tag == "wall")
+            {
+                Destroy(gameObject);
+            }
             //Possible bounce logic
-            Destroy(gameObject);
+            
         }
         if (other.gameObject.GetComponent<ITakeDamage>() != null)
         {

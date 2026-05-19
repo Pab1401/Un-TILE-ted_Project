@@ -4154,7 +4154,7 @@ MonoBehaviour:
   scorpionPrefab: {fileID: 1244017973247475735, guid: 387962d06ae53774daee157e486c6f30, type: 3}
   shootLogic: {fileID: 1662120007}
   snakePrefab: {fileID: 8179561722065041927, guid: 3a3be52e75d26bc4d8314d5b3780139d, type: 3}
-  scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 0f8d3c25e5dec6b45bcf69a05f012a74, type: 3}
+  scorpionProjectilePrefab: {fileID: 4861929931423821200, guid: 824633e52a7d06e4995098daed0e11ef, type: 3}
   bossPrefab: {fileID: 3121635227820515130, guid: 1078fe36883ab274bb89fef1f41e655a, type: 3}
   GameManager: {fileID: 1158321310}
   enemyCount: 0
