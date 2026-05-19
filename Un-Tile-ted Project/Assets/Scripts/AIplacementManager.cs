@@ -52,7 +52,11 @@ public class AIplacementManager : MonoBehaviour
 
     public void GenerateEnemySpawnPositions()
     {
-        Boss = dataGenerator.Boss;
+        if (dataGenerator.Boss)
+        {
+            Boss = dataGenerator.Boss;
+            GameManager.Boss = dataGenerator.Boss;
+        }
         // Debug.Log(enemyList.Count);
         for (int i = 0; i < enemyCount; i++)
         {
@@ -138,6 +142,7 @@ public class AIplacementManager : MonoBehaviour
         }
         if (Boss)
         {
+            GameManager.Boss = true;
             middle = dataGenerator.Grid.GetLength(0) / 2;
             bossPrefab.GetComponent<BossStats>().manager = FindFirstObjectByType<GameManager>();
             bossPrefab.GetComponent<BossBehaviour>().player = player;

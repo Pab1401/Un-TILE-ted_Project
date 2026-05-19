@@ -9,6 +9,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image pauseMenu;
     [SerializeField] UnityEngine.UI.Image levelClearedMenu;
     [SerializeField] UnityEngine.UI.Image levelFailedMenu;
+    private bool boss;
+    public bool Boss
+    {
+        get {return boss; }
+        set 
+        {
+            boss = value;
+            if (boss)
+            {
+                isBossAlive = true;
+            }
+        }
+    }
+
+    private bool isBossAlive;
+    public bool IsBossAlive
+    {
+        get {return isBossAlive;}
+        set
+        {
+            isBossAlive = value;
+            if (!isBossAlive && boss)
+            {
+                GameWin();
+            }
+        }
+    }
 
     public string nextScene;
     private int enemyCount;
@@ -19,7 +46,7 @@ public class GameManager : MonoBehaviour
         set
         {
             enemyCount = value;
-            if (enemyCount <= 0)
+            if (enemyCount <= 0 && !Boss)
                 GameWin();
         }
     }
@@ -29,14 +56,14 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        // Inicialización de Menús
+        // Inicializaciï¿½n de Menï¿½s
         if (levelFailedMenu) levelFailedMenu.gameObject.SetActive(false);
         if (levelClearedMenu) levelClearedMenu.gameObject.SetActive(false);
         if (pauseMenu) pauseMenu.gameObject.SetActive(false);
 
         isPaused = false;
 
-        // Configuración del Input de Pausa
+        // Configuraciï¿½n del Input de Pausa
         pauseAction = InputSystem.actions.FindAction("Pause");
         if (pauseAction != null) pauseAction.performed += OnPause;
     }
@@ -55,14 +82,14 @@ public class GameManager : MonoBehaviour
         UnityEngine.Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
         UnityEngine.Cursor.visible = isPaused;
 
-        // --- COMUNICACIÓN CON EL AUDIO MANAGER ---
-        // Aquí es donde le avisamos al AudioManager que cambie a la música de pausa
+        // --- COMUNICACIï¿½N CON EL AUDIO MANAGER ---
+        // Aquï¿½ es donde le avisamos al AudioManager que cambie a la mï¿½sica de pausa
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.TogglePauseMusic(isPaused);
         }
 
-        // Control de Inputs y Menú Visual
+        // Control de Inputs y Menï¿½ Visual
         if (isPaused)
         {
             playerInput.moveAction.Disable();
@@ -115,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        // Guardar estadísticas antes de cambiar de escena
+        // Guardar estadï¿½sticas antes de cambiar de escena
         PlayerStatus playerStats = FindFirstObjectByType<PlayerStatus>();
         if (playerStats != null && Vault.Instance != null)
         {

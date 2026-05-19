@@ -154,3 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletStats
   damage: 0
+  shooter: {fileID: 0}
+  bounce: 0

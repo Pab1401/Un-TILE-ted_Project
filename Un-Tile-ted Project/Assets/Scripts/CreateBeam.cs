@@ -6,7 +6,8 @@ public class CreateBeam : MonoBehaviour
     void Start()
     {
         Rigidbody rb = gameObject.GetComponent<Rigidbody>() ? gameObject.GetComponent<Rigidbody>() : gameObject.AddComponent<Rigidbody>();
-        rb.AddTorque(UnityEngine.Vector3.forward, ForceMode.Force);
+        rb.useGravity = false;
+        rb.AddTorque(UnityEngine.Vector3.right, ForceMode.Force);
     }
     private void OnEnable()
     {
@@ -25,14 +26,21 @@ public class CreateBeam : MonoBehaviour
         RaycastHit hit;
         LineRenderer lr = gameObject.GetComponent<LineRenderer>() ? gameObject.GetComponent<LineRenderer>() : gameObject.AddComponent<LineRenderer>();
         lr.positionCount = 2;
-        lr.SetPosition(0, gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f));
-        lr.SetPosition(1, gameObject.transform.position + (UnityEngine.Vector3.forward * 0.5f));
-        if (Physics.Raycast(gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f), gameObject.transform.position + (UnityEngine.Vector3.forward * 0.5f), out hit, 80f))
+        lr.SetPosition(0, gameObject.transform.position + (UnityEngine.Vector3.back * 1));
+        lr.SetPosition(1, gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f) * 80);
+        if (Physics.Raycast(gameObject.transform.position + (UnityEngine.Vector3.back * 1), gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f), out hit, 80f))
         {
+            Debug.Log("Object hit: " + hit.collider.name);
+            Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
             if (hit.collider.gameObject.tag == "Player")
             {
+                Debug.Log("Object hit: " + hit.collider.name);
                 hit.collider.gameObject.GetComponent<PlayerStatus>().TakeDamage(damage);
             }
+        }
+        else
+        {
+             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f) * 80, Color.green);
         }
         GameObject.Destroy(gameObject, 0.5f);
         

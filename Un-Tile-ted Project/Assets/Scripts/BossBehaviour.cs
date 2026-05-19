@@ -16,20 +16,21 @@ public class BossBehaviour : MonoBehaviour
     public int phase = 0;
     public float actionDelay = 1f;
     public int enemyCount;
-    private int maxEnemies;
+    [SerializeField] private int maxEnemies;
     [SerializeField] private int repetitions = 3;
     private int GridMiddle;
     private BossEnemyInstancer enemyMaker;
     private BossShooter shooter; 
     
     public int delay = 100;
+    private bool shouldPhaseChange = false;
     void OnEnable()
     {
-        BossStats.OnPhaseChange += () => phase++;
+        BossStats.OnPhaseChange += () => shouldPhaseChange = true;
     }
     void OnDisable()
     {
-        BossStats.OnPhaseChange -= () => phase++;
+        BossStats.OnPhaseChange -= () => shouldPhaseChange = false;
     }
     void Start()
     {
@@ -50,14 +51,14 @@ public class BossBehaviour : MonoBehaviour
 
     async Task SpawnMinions()
     {
-        
+        await enemyMaker.MakeEnemies(player);
     }
 
     async Task ShootBeams()
     {
         for (int i = 0; i < repetitions;i++)
         {
-            await shooter.Beams();
+            await shooter.Beams(GridMiddle);
             await Task.Delay(delay);
         }
         OnFireBeams?.Invoke(Stats.beamDamage);
@@ -67,6 +68,11 @@ public class BossBehaviour : MonoBehaviour
     {
         while (true)
         {
+            if (shouldPhaseChange)
+            {
+                phase++;
+                shouldPhaseChange = false;
+            }
             yield return new WaitForSeconds(actionDelay);
             Task actionTask;
             switch(phase)
@@ -76,17 +82,13 @@ public class BossBehaviour : MonoBehaviour
                     yield return new WaitUntil(() => actionTask.IsCompleted);
                     break;
                 case 1:
-                    actionTask = ShootPlayer();
-                    yield return new WaitUntil(() => actionTask.IsCompleted);
-                    actionTask = ShootPlayer();
+                    actionTask = ShootBeams();
                     yield return new WaitUntil(() => actionTask.IsCompleted);
                     break;
                 case 2:
                     actionTask = ShootPlayer();
                     yield return new WaitUntil(() => actionTask.IsCompleted);
-                    actionTask = ShootPlayer();
-                    yield return new WaitUntil(() => actionTask.IsCompleted);
-                    actionTask = ShootPlayer();
+                    actionTask = ShootBeams();
                     yield return new WaitUntil(() => actionTask.IsCompleted);
                     break;
             }

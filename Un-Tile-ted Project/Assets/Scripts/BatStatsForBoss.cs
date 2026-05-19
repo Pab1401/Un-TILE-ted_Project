@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using UnityEngine;
 
-public class BatStatsForBoss : MonoBehaviour
+public class BatStatsForBoss : MonoBehaviour, ITakeDamage
 {
     public batBehaviour behaviour;
     public BossBehaviour manager;

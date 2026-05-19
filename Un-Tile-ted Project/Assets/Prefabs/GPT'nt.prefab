@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6024799075825156980}
   m_Layer: 0
   m_Name: EnemyInstancer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52b5daef10ef4f46a2f1928ab24335c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossEnemyInstancer
-  enemyPrefab: {fileID: 3224017341082361379, guid: 5a6cc403d7b88a84485593652672933c, type: 3}
+  enemyPrefab: {fileID: 3224017341082361379, guid: 208654893ba417b4e82c09dd523388e2, type: 3}
 --- !u!1 &2450266551157791398
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4732762306123690952}
   m_Layer: 0
   m_Name: LaserMaker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4dc7beabd51604cba03ebc0ca5a4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossLaserMaker
+  beamPrefab: {fileID: 6629229601641032369, guid: 4c942ae0d9b016d4c8c86a2530b8b9a4, type: 3}
   shootingPoint: {x: 0, y: 0, z: 0}
   shootL: {fileID: 4732762306123690952}
 --- !u!114 &4732762306123690952
@@ -161,7 +162,8 @@ MonoBehaviour:
   phase: 0
   actionDelay: 2
   enemyCount: 0
-  repetitions: 8
+  maxEnemies: 8
+  repetitions: 3
   delay: 100
 --- !u!114 &-4204045260286561625
 MonoBehaviour:
@@ -239,7 +241,7 @@ GameObject:
   - component: {fileID: 931254440960892927}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

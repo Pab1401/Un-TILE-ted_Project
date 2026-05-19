@@ -23,7 +23,7 @@ public class BossStats : MonoBehaviour, ITakeDamage
         }
         if (health <= 0)
         {
-            manager.EnemyCount--;
+            manager.IsBossAlive = false;
         }
     }
 }
