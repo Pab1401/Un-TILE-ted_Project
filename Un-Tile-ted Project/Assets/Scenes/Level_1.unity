@@ -194,7 +194,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.36964378, y: 0.23911767, z: -0.09904577, w: 0.89239913}
   m_LocalPosition: {x: -0.06, y: 0.45000005, z: -0.19}
-  m_LocalScale: {x: 0.49000004, y: 0.49000004, z: 0.49000004}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1653388640}
@@ -248,7 +248,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1396441008, guid: 7cfd4af1749eb8d4b8a48bd40677ba2f, type: 3}
+  m_Sprite: {fileID: 1163220132, guid: b3793ad397929e74b8416e8fffe92575, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -304,9 +304,12 @@ MonoBehaviour:
   WallPrefab: {fileID: 4665568860243863614, guid: 16750797facf5f3408884e2424f149c6, type: 3}
   ForestPrefab: {fileID: 6677404834392293815, guid: a5a4d6182406f1f40a04f24832916d6d, type: 3}
   spacing: 1.1
+  wallBorderThickness: 3
+  isBossRoom: 0
   FloorMaterial: {fileID: 2100000, guid: 74a0d09e25449e34696215510d80618d, type: 2}
   WallMaterial: {fileID: 2100000, guid: df2d18bbecae50e4c8886fbe7e8ea3a2, type: 2}
   ForestMaterial: {fileID: 2100000, guid: 29e638beee607b745b7c24eb996443dd, type: 2}
+  PlaneMaterial: {fileID: 2100000, guid: ffe3df33d04757345b3a05b25d486622, type: 2}
   aiPlacementManager: {fileID: 1586103679}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &185668389
@@ -1857,7 +1860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapGeneration
   size: 33
   Boss: 0
-  spawnPos: {x: 0, y: 0}
+  spawnPos: {x: 31, y: 31}
 --- !u!4 &899213557
 Transform:
   m_ObjectHideFlags: 0

@@ -15,11 +15,12 @@ public class BulletStats : MonoBehaviour
             return;
         if (other.gameObject.GetComponent<ICanCollide>() != null)
         {
-            if (other.gameObject.tag == "wall")
+            if (canIgnoreWalls && other.gameObject.tag != "walls")
             {
-                Destroy(gameObject);
+                return;   
             }
             //Possible bounce logic
+            Destroy(gameObject);
             
         }
         if (other.gameObject.GetComponent<ITakeDamage>() != null)

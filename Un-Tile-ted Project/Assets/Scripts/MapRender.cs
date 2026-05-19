@@ -14,11 +14,14 @@ public class MapRender : MonoBehaviour
 
     [Header("Visual Settings")]
     [SerializeField] public float spacing = 1.1f;
+    [SerializeField] private int wallBorderThickness = 3; 
+    public bool isBossRoom; // Check this to disable the outside walls
 
     [Header("Materials")]
     [SerializeField] private Material FloorMaterial;
     [SerializeField] private Material WallMaterial;
     [SerializeField] private Material ForestMaterial;
+    [SerializeField] private Material PlaneMaterial; 
 
     private Vector3 SideCenter;
     private Vector3 TopCenter;
@@ -36,6 +39,7 @@ public class MapRender : MonoBehaviour
     
     public void RenderMap()
     {
+        dataGenerator.Boss = isBossRoom;
         // 1. Clean up old map if it exists
         if (mapParent != null) Destroy(mapParent);
 
@@ -104,6 +108,62 @@ public class MapRender : MonoBehaviour
 
             }
         }
-        
+
+        // 4. Spawn the surrounding Wall Border ONLY if it's NOT a boss room
+        if (!isBossRoom)
+        {
+            GenerateWallBorder(size);
+        }
+
+        // 5. Create and place the Plane underneath
+        CreateUnderMapPlane(size);
+    }
+
+    private void GenerateWallBorder(int size)
+    {
+        for (int x = -wallBorderThickness; x < size + wallBorderThickness; x++)
+        {
+            for (int y = -wallBorderThickness; y < size + wallBorderThickness; y++)
+            {
+                if (x < 0 || x >= size || y < 0 || y >= size)
+                {
+                    Vector3 pos = new Vector3(x * spacing, 0, y * spacing);
+                    GameObject borderWall = Instantiate(WallPrefab, pos, Quaternion.identity, mapParent.transform);
+                    borderWall.name = $"Border_Wall_{x}_{y}";
+
+                    MeshRenderer renderer_w = borderWall.GetComponent<MeshRenderer>();
+                    if (renderer_w != null)
+                    {
+                        renderer_w.material = WallMaterial;
+                    }
+                }
+            }
+        }
+    }
+
+    private void CreateUnderMapPlane(int size)
+    {
+        // Adjust plane calculations based on whether we have borders or not
+        int thickness = isBossRoom ? 0 : wallBorderThickness;
+        float totalCells = size + (thickness * 2);
+        float totalWorldSize = totalCells * spacing;
+
+        float centerOffset = ((size - 1) * spacing) / 2f;
+        Vector3 planePosition = new Vector3(centerOffset, -0.01f, centerOffset); 
+
+        GameObject underPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        underPlane.name = "Map_UnderPlane";
+        underPlane.transform.position = planePosition;
+        underPlane.transform.SetParent(mapParent.transform);
+
+        float planeScaleX = totalWorldSize / 10f;
+        float planeScaleZ = totalWorldSize / 10f;
+        underPlane.transform.localScale = new Vector3(planeScaleX, 1f, planeScaleZ);
+
+        if (PlaneMaterial != null)
+        {
+            MeshRenderer planeRenderer = underPlane.GetComponent<MeshRenderer>();
+            planeRenderer.material = PlaneMaterial;
+        }
     }
 }
