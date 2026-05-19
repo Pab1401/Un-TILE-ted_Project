@@ -28,10 +28,12 @@ public class CreateBeam : MonoBehaviour
         lr.positionCount = 2;
         lr.SetPosition(0, gameObject.transform.position + (UnityEngine.Vector3.back * 1));
         lr.SetPosition(1, gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f) * 80);
-        if (Physics.Raycast(gameObject.transform.position + (UnityEngine.Vector3.back * 1), gameObject.transform.position + (UnityEngine.Vector3.back * 0.5f), out hit, 80f))
+        if (Physics.Raycast(gameObject.transform.position + (UnityEngine.Vector3.back * 1), gameObject.transform.position + (UnityEngine.Vector3.back * 1.5f), out hit, 80f))
         {
             Debug.Log("Object hit: " + hit.collider.name);
             Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+            if (hit.collider.tag == "Enemy")
+                
             if (hit.collider.gameObject.tag == "Player")
             {
                 Debug.Log("Object hit: " + hit.collider.name);

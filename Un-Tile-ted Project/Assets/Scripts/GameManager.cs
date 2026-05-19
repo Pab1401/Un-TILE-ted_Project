@@ -157,6 +157,6 @@ public class GameManager : MonoBehaviour
     public void LevelRestart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
     }
 }

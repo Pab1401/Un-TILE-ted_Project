@@ -5,6 +5,7 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
 {
     public static event System.Action<float> OnHealthChanged;
     public static event System.Action<bool> OnPlayerReload;
+    public static event System.Action<int, int> OnAmmoChanged;
     private GameManager manager;
     // Set Stats
     private float health = 100;
@@ -33,7 +34,11 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
             currentBullets = value;
 
             if (currentBullets == 0)
+            {
                 StartCoroutine(Reload());
+                OnPlayerReload?.Invoke(true);
+            }
+            OnAmmoChanged?.Invoke(currentBullets, maxBullets);
         }
     }
 
@@ -56,7 +61,7 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
         if (health <= 0)
         {
             AudioManager.Instance.PlayPlayerDeath();
-            // Lógica de muerte...
+            // Lï¿½gica de muerte...
         }
         else
         {
@@ -85,12 +90,14 @@ public class PlayerStatus : MonoBehaviour, ITakeDamage, IHealDamage
         invincible = false;
         currentBullets = maxBullets;
         OnHealthChanged?.Invoke(health);
+        OnAmmoChanged?.Invoke(currentBullets, maxBullets);
     }
     IEnumerator Reload()
     {
         OnPlayerReload?.Invoke(true);
         yield return new WaitForSeconds(reloadTime);
         currentBullets = maxBullets;
+        OnAmmoChanged?.Invoke(currentBullets, maxBullets);
     }
 
     IEnumerator InvincibilityFrames()
