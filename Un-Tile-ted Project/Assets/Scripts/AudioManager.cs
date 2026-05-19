@@ -200,7 +200,7 @@ public class AudioManager : MonoBehaviour
     {
         MusicTrack trackToPlay = menuMusic;
         if (sceneName == "MainMenu") trackToPlay = menuMusic;
-        else if (sceneName == "Tutorial_Level") trackToPlay = tutorialMusic;
+        else if (sceneName == "TutorialScreen") trackToPlay = tutorialMusic;
         else
         {
             if (sceneName.Contains("1") && levelMusics.Count > 0) trackToPlay = levelMusics[0];
