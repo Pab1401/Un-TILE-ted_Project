@@ -7,7 +7,7 @@ public class TutorialSceneSkip : MonoBehaviour
     void Start()
     {
         // Start the timer as soon as the scene begins
-        StartCoroutine(LoadSceneAfterDelay(4f));
+        StartCoroutine(LoadSceneAfterDelay(7f));
     }
 
     private IEnumerator LoadSceneAfterDelay(float delay)
